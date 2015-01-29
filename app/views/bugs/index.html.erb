@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="twelve columns">
+    <div class="two columns offset-by-five">
+      <h1>Bugs</h1>
+    </div>
+    <div class="two columns offset-by-three">
+    <% if user_signed_in? %>
+      <%= link_to "Sign out", destroy_user_session_path, :style=>'text-align:center; margin-top:2rem;', :class => "button", :method => :delete %>
+    <% else %>
+      <%= link_to "Sign in", new_user_session_path, {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
+    <% end %>
+    </div>
+  </div>
+  <div class="twelve columns">
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Date Reported</th>
+          <th>Category</th>
+          <th colspan="2">Title</th>
+          <th>Push Date</th>
+          <th colspan="2">Email</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @bugs.each do |bug| %>
+          <tr>
+            <td><%= bug.status %></td>
+            <td><%= bug.created_at  %></td>
+            <td><%= bug.category %></td>
+            <td colspan="2"><%= bug.title %></td>
+            <td><%= bug.push_date %></td>
+            <td colspan="2"><%= bug.email %></td>
+            <td class="table-button"><%= link_to 'Show', bug, {:style=>'text-align:center; margin-top:1rem; margin-left: -1rem;', :class => "button"} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <br>
+  <div class="two columns offset-by-five"><%= paginate @bugs %></div>
+  <div class="twelve columns"><%= link_to 'New Bug', new_bug_path, {:style=>'text-align:center;', :class => "button"} %></div>
+  </div>
+</div>
+

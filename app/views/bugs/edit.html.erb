@@ -1,0 +1,10 @@
+<%= link_to 'Back', bugs_path, {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
+<% if user_signed_in? %>
+  | <%= link_to 'Destroy', @bug, { method: :delete, :style=>'text-align:center; margin-top:2rem;', :class => "button", data: { confirm: 'Are you sure?' }} %>
+<% end %>
+
+<div class="twelve columns"><h1>Edit Bug</h1></div>
+
+<%= render 'form' %>
+
+

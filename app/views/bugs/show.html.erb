@@ -1,0 +1,99 @@
+<%= link_to 'Back', bugs_path, {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
+<% if user_signed_in? %>
+  | <%= link_to 'Edit', edit_bug_path(@bug), {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
+  | <%= link_to 'Destroy', @bug, { method: :delete, :style=>'text-align:center; margin-top:2rem;', :class => "button", data: { confirm: 'Are you sure?' }} %>
+<% end %>
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="eight columns">
+    <h3><%= @bug.title %></h3>
+  </div>
+</div>
+<div class="row">
+  <div class="twelve columns">
+    <p>
+      <strong><u>Push Date:</u></strong>
+      <%= @bug.push_date %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Org:</u></strong>
+      <%= @bug.org %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Email:</u></strong>
+      <%= @bug.email %>
+    </p>
+  </div>
+  <% if user_signed_in? %>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Bugster:</u></strong>
+      <%= @bug.bugster %>
+    </p>
+  </div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="twelve columns">
+    <p>
+      <strong><u>Status:</u></strong>
+      <%= @bug.status %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Category:</u></strong>
+      <%= @bug.category %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="twelve columns">
+    <p>
+      <strong><u>Details:</u></strong>
+      <%= @bug.details %>
+    </p>
+  </div>
+</div>
+<% if @bug.images.exists? %>
+  <div class="row">
+    <div class="twelve columns">
+      <div class="image-row">
+          <div class="image-set">
+            <p><strong><u>Images:</u></strong></p>
+            <% @bug.images.each do |image| %>
+                <a class="without-caption image-link" data-lightbox="image-1" rel="shadowbox" href="<%=image.image.url %>" title=""><%= image_tag image.image.url(:med) %></a>
+            <% end %>  
+          </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="twelve columns">
+    <h3><u>Comments</u></h3>
+    <% @comments.each do |comment| %>
+      <div class="row">
+        <strong><u><%= comment.user_name %></u></strong> 
+        <i class="comment-date"><%= time_ago_in_words(comment.created_at) + " Ago" %></i>
+      </div>
+      <div class="row">
+        <br/>
+        <p><%= comment.body %></p>
+        <% if user_signed_in? %>
+          <p><%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="twelve columns">
+    <div class="button comments-button">Add Comments</div>
+    <div class="six columns comments-form">
+      <%= render 'comments/form' %>
+    </div>
+  </div>
+</div>
