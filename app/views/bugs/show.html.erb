@@ -78,6 +78,7 @@
     <h3><u>Comments</u></h3>
     <% @comments.each do |comment| %>
       <div class="row">
+        <a name="comment<%= comment.id %>"></a>
         <strong><u><%= comment.user_name %></u></strong> 
         <i class="comment-date"><%= time_ago_in_words(comment.created_at) + " Ago" %></i>
       </div>

@@ -22,6 +22,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.save
+    CommentCreator.send_comment_notifier_email(@comment).deliver
     redirect_to(@comment.bug)
   end
 

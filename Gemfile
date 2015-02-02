@@ -30,6 +30,7 @@ gem 'lodash-rails'
 gem 'daemons'
 gem "figaro"
 gem 'kaminari'
+gem 'sendgrid'
 
 group :development do
   gem "bundler-audit"

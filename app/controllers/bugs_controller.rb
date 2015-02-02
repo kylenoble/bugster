@@ -24,8 +24,8 @@ class BugsController < ApplicationController
 
   def create
     @bug = Bug.new(bug_params)
-    logger.debug "creatin"
     if @bug.save
+      BugCreator.send_bug_notifier_email(@bug).deliver
       if params[:bug][:images]
         logger.debug "True"
         params[:bug][:images].each { |image|
