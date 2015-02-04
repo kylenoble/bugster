@@ -4,16 +4,16 @@ class CommentsController < ApplicationController
 
   def index
     @comments = Comment.all
-    redirect_to(@comment.bug)
+    respond_type
   end
 
   def show
-    redirect_to(@comment.bug)
+    respond_type
   end
 
   def new
     @comment = Comment.new
-    redirect_to(@comment.bug)
+    respond_type
   end
 
   def edit
@@ -21,19 +21,26 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+
     @comment.save
-    CommentCreator.send_comment_notifier_email(@comment).deliver
-    redirect_to(@comment.bug)
+    if !@comment.bug_id
+      puts "request"
+      RequestCommentCreator.send_request_comment_notifier_email(@comment).deliver
+    else 
+      puts "bug"
+      CommentCreator.send_comment_notifier_email(@comment).deliver
+    end
+    respond_type
   end
 
   def update
     @comment.update(comment_params)
-    redirect_to(@comment.bug)
+    respond_type
   end
 
   def destroy
     @comment.destroy
-    redirect_to(@comment.bug)
+    respond_type
   end
 
   private
@@ -41,8 +48,15 @@ class CommentsController < ApplicationController
       @comment = Comment.find(params[:id])
     end
 
+    def respond_type
+      if !@comment.bug_id
+        redirect_to(@comment.request)
+      else 
+        redirect_to(@comment.bug)
+      end
+    end
 
     def comment_params
-      params.require(:comment).permit(:user_name, :body, :bug_id)
+      params.require(:comment).permit(:user_name, :body, :bug_id, :request_id)
     end
 end

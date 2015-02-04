@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
 	belongs_to :bug
+	belongs_to :request
 
 	validates_presence_of :user_name 
   validates_length_of :user_name, :within => 2..20 

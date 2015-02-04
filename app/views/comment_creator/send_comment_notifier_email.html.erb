@@ -2,15 +2,16 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <link rel="stylesheet" type="text/css" href="http://localhost:3000/assets/application-0898c128b5a4a74270991c9832c8749d.css">
+    <link rel="stylesheet" type="text/css" href="/assets/application-0898c128b5a4a74270991c9832c8749d.css">
   </head>
   <body>
-  	<div class="container">
-	    <h1>A response has been added to your bug. </h1>
-	    <h4>Please take the time to review the reponse when you get the chance. <%= @comment.body %></h5>
-      <h4>You can view the response <a href="<%= bug_url(@comment.bug) %>#comment<%= @comment.id %>">here</a>.</h4><br>
-	    <h5>Thanks,</h5>
-	    <h5>Ignite Media Team</p>
+    <div class="container">
+      <h1>A response has been added to your bug. </h1>
+      <h4>Please take the time to review the reponse below: </h5><br>
+      <p><%= @comment.body %></p> <br>
+      <h4>You can respond by clicking <a href="<%= bug_url(@comment.bug) %>#comment<%= @comment.id %>">here</a>.</h4><br>
+      <h5>Thanks,</h5>
+      <h5>Ignite Media Team</p>
     </div>
   </body>
 </html>

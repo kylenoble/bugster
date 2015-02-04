@@ -1,5 +1,5 @@
 <%= link_to 'Back', bugs_path, {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
-<% if user_signed_in? %>
+<% if admin_signed_in? %>
   | <%= link_to 'Edit', edit_bug_path(@bug), {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
   | <%= link_to 'Destroy', @bug, { method: :delete, :style=>'text-align:center; margin-top:2rem;', :class => "button", data: { confirm: 'Are you sure?' }} %>
 <% end %>
@@ -85,7 +85,7 @@
       <div class="row">
         <br/>
         <p><%= comment.body %></p>
-        <% if user_signed_in? %>
+        <% if admin_signed_in? %>
           <p><%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
         <% end %>
       </div>

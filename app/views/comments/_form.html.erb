@@ -15,6 +15,8 @@
     <%= f.label :name %><br>
     <% if user_signed_in? %>
       <%= f.text_field :user_name, :value => current_user.name %>
+    <% elsif admin_signed_in? %>
+      <%= f.text_field :user_name, :value => current_admin.name %>
     <% else %>
       <%= f.text_field :user_name %>
     <% end %>
@@ -24,6 +26,7 @@
     <%= f.text_area :body %>
   </div>
   <%= f.hidden_field :bug_id %>
+  <%= f.hidden_field :request_id %>
   <div class="actions">
     <%= f.submit class: 'comment-submit' %>
   </div>
