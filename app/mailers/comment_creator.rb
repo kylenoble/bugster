@@ -5,4 +5,5 @@ class CommentCreator < ActionMailer::Base
   	@comment = comment
     mail( :to => @comment.bug.email, :subject => 'A Comment has been added to your Bug!' )
   end
+  handle_asynchronously :send_comment_notifier_email, :priority => 20
 end

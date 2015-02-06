@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
 
   def index
     @comments = Comment.all
-    respond_type
   end
 
   def show
@@ -24,10 +23,10 @@ class CommentsController < ApplicationController
 
     @comment.save
     if !@comment.bug_id
-      puts "request"
+      Asana.create_comment(@comment.request.task_id, comment_params["body"])
       RequestCommentCreator.send_request_comment_notifier_email(@comment).deliver
     else 
-      puts "bug"
+      Asana.create_comment(@comment.bug.task_id, comment_params["body"])
       CommentCreator.send_comment_notifier_email(@comment).deliver
     end
     respond_type
@@ -44,6 +43,7 @@ class CommentsController < ApplicationController
   end
 
   private
+
     def set_comment
       @comment = Comment.find(params[:id])
     end

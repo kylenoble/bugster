@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204165603) do
+ActiveRecord::Schema.define(version: 20150206193702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150204165603) do
     t.datetime "updated_at"
     t.string   "category"
     t.string   "push_date",  default: "TBA"
+    t.string   "task_id"
   end
 
   add_index "bugs", ["org"], name: "index_bugs_on_org", using: :btree
@@ -58,6 +59,7 @@ ActiveRecord::Schema.define(version: 20150204165603) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "request_id"
+    t.string   "story_id"
   end
 
   add_index "comments", ["request_id"], name: "index_comments_on_request_id", using: :btree
@@ -100,6 +102,7 @@ ActiveRecord::Schema.define(version: 20150204165603) do
     t.string   "push_date",  default: "TBA"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "task_id"
   end
 
   add_index "requests", ["org"], name: "index_requests_on_org", using: :btree

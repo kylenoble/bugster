@@ -14,6 +14,7 @@ class RequestsController < ApplicationController
   end
 
   def show
+    update_comments
     @comments = @request.comments.all
     @comment = @request.comments.build
     respond_with(@request)
@@ -53,6 +54,18 @@ class RequestsController < ApplicationController
   end
 
   private
+
+    def update_comments
+      asana_comments = Asana.get_comments(@request.task_id)
+      asana_comments["data"].each do |comment|
+        if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty?
+          Comment.create!(:created_at => comment["created_at"], :body => comment["text"], 
+            :user_name => comment["created_by"]["name"], :request_id => @request.id, 
+            :story_id => comment["id"].to_s)
+        end
+      end
+    end
+
     def check_login
       if user_signed_in? || admin_signed_in?
         @user = current_user
