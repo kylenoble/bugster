@@ -34,7 +34,7 @@ class BugsController < ApplicationController
         }
       end
     end
-    BugCreator.delay.send_bug_notifier_email(@bug)
+    BugCreator.send_bug_notifier_email(@bug)
 
     respond_with(@bug)
   end
@@ -53,11 +53,13 @@ class BugsController < ApplicationController
 
     def update_comments
         asana_comments = Asana.get_comments(@bug.task_id)
-        asana_comments["data"].each do |comment|
-          if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty?
-            Comment.create!(:created_at => comment["created_at"], :body => comment["text"], 
-              :user_name => comment["created_by"]["name"], :bug_id => @bug.id, 
-              :story_id => comment["id"].to_s)
+        if !asana_comments.nil?
+          asana_comments["data"].each do |comment|
+            if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty?
+              Comment.create!(:created_at => comment["created_at"], :body => comment["text"], 
+                :user_name => comment["created_by"]["name"], :bug_id => @bug.id, 
+                :story_id => comment["id"].to_s)
+            end
           end
         end
     end

@@ -57,11 +57,13 @@ class RequestsController < ApplicationController
 
     def update_comments
       asana_comments = Asana.get_comments(@request.task_id)
-      asana_comments["data"].each do |comment|
-        if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty?
-          Comment.create!(:created_at => comment["created_at"], :body => comment["text"], 
-            :user_name => comment["created_by"]["name"], :request_id => @request.id, 
-            :story_id => comment["id"].to_s)
+      if !asana_comments.nil?
+        asana_comments["data"].each do |comment|
+          if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty?
+            Comment.create!(:created_at => comment["created_at"], :body => comment["text"], 
+              :user_name => comment["created_by"]["name"], :request_id => @request.id, 
+              :story_id => comment["id"].to_s)
+          end
         end
       end
     end
