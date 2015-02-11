@@ -33,6 +33,8 @@ class RequestsController < ApplicationController
     @request.user_id = @user.id
     @request.org = @user.org
     @request.email = @user.email
+    task_id = Asana.create_task(@workspace, @project, request_params[:title])
+    @request.task_id = task_id
     if @request.save
       if params[:request][:images]
         params[:request][:images].each { |image|
@@ -66,6 +68,11 @@ class RequestsController < ApplicationController
           end
         end
       end
+    end
+
+    def get_asana_info
+      @workspace = 11578168261560
+      @project = 26598858855779
     end
 
     def check_login

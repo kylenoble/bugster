@@ -6,13 +6,68 @@
   <meta name="viewport" content="initial-scale=1" />
   <title><%= title %></title>
   <link rel="stylesheet" type="text/css" href="/assets/application-0898c128b5a4a74270991c9832c8749d.css">
+  <script type="text/javascript" src="/assets/application-73763660c2a072c37b809444063b1ea8.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= body_class %>">
-  <%= render "flashes" -%>
+  <div class="twelve columns nav">
+    <% if request.path == "/requests" %>
+      <div class="one column offset-by-one">
+        <%= link_to 'New request', new_request_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+      </div>
+      <div class="one column offset-by-seven">
+        <% if user_signed_in? %>
+          <%= link_to "Sign out", destroy_user_session_path, :style=>'text-align:center; margin-top:1rem;', :class => "button", :method => :delete %>
+        <% elsif admin_signed_in? %>
+          <%= link_to "Sign out", destroy_admin_session_path, :style=>'text-align:center; margin-top:1rem;', :class => "button", :method => :delete %>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+        <% end %>
+      </div>
+    <% elsif request.path == "/tickets" %>
+      <div class="two columns offset-by-one">
+        <%= link_to 'Open A Support Ticket', new_bug_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+      </div>
+      <div class="one column offset-by-seven">
+        <% if user_signed_in? %>
+          <%= link_to "Sign out", destroy_user_session_path, :style=>'text-align:center; margin-top:1rem;', :class => "button", :method => :delete %>
+        <% elsif admin_signed_in? %>
+          <%= link_to "Sign out", destroy_admin_session_path, :style=>'text-align:center; margin-top:1rem;', :class => "button", :method => :delete %>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+        <% end %>
+        </div>
+      <% else %>
+        <div class="one column offset-by-nine">
+          <% if user_signed_in? %>
+            <%= link_to "Sign out", destroy_user_session_path, :style=>'text-align:center; margin-top:1rem;', :class => "button", :method => :delete %>
+          <% elsif admin_signed_in? %>
+            <%= link_to "Sign out", destroy_admin_session_path, :style=>'text-align:center; margin-top:1rem;', :class => "button", :method => :delete %>
+          <% else %>
+            <%= link_to "Sign in", new_user_session_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   <div class="container">
+    <%= render "flashes" -%>
   	<%= yield %>
   </div>
-  <script type="text/javascript" src="/assets/application-73763660c2a072c37b809444063b1ea8.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $(window).scroll(function() {
+      var menuPosition = $('.nav').offset().top;
+      var windowPosition = $(document).scrollTop();
+      var contentPosition = $('.container').offset().top; 
+
+       if ( menuPosition <= contentPosition ) {
+         $(".nav").show();
+       } else {
+         $(".nav").hide();
+       } 
+
+    });
+  });
+  </script>
 </body>
 </html>

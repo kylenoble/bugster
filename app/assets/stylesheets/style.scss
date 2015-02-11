@@ -6,6 +6,17 @@ body {
 	margin-top: 20px;
 }
 
+.button {
+	background: -webkit-linear-gradient(left, rgba(255,255,255,.5), rgba(255,255,255,.55)); 
+  background: -o-linear-gradient(right, rgba(255,255,255,.5), rgba(255,255,255,.55)); 
+  background: -moz-linear-gradient(right, rgba(255,255,255,.5), rgba(255,255,255,.55));
+  background: linear-gradient(to right, rgba(255,255,255,.5), rgba(255,255,255,.55)); 
+}
+
+.container {
+	margin-top: 5%;
+}
+
 .comments-form {
 	display: none;
 	margin-left: 0%;
@@ -24,10 +35,32 @@ body {
 	margin-right: 5px;
 }
 
+.hero {
+	height: 100vh;
+  background-image: url("https://ununsplash.imgix.net/38/L2NfDz5SOm7Gbf755qpw_DSCF0490.jpg?q=75&fm=jpg&s=385fefca6e96d3bc1c0ea31794dc4562");
+  background-size: cover;
+  background-position: center;
+  font-weight: 700;
+  text-align: center;
+}
+
+.hero h1 {
+	padding-top:10%;
+	color: white;
+}
+
+.nav {
+	background: -webkit-linear-gradient(left, rgba(50,100,200,.5), rgba(50,100,200,.55)); 
+  background: -o-linear-gradient(right, rgba(50,100,200,.5), rgba(50,100,200,.55)); 
+  background: -moz-linear-gradient(right, rgba(50,100,200,.5), rgba(50,100,200,.55));
+  background: linear-gradient(to right, rgba(50,100,200,.5), rgba(50,100,200,.55));
+  position: fixed;
+  top: 0; 
+}
+
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
-
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -46,6 +79,7 @@ body {
   width: 100%;
   height: 2px;
 }
+
 
 u {
 	text-decoration: none;

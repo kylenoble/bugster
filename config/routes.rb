@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
   devise_for :admins, module: 'admins' 
   resources :requests
 
@@ -10,5 +12,5 @@ Rails.application.routes.draw do
   	get "sign_in", to: "users/sessions#new", :as => :login
 	end
 
-	root "bugs#index"
+	root "home#index"
 end

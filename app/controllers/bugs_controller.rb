@@ -66,7 +66,7 @@ class BugsController < ApplicationController
 
     def get_asana_info
       @workspace = 11578168261560
-      @project = 26107926489815
+      @project = 26598858855777
     end
 
     def set_bug
