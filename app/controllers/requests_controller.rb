@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
   before_action :check_login
   before_action :set_request, only: [:show, :edit, :update, :destroy]
-
+  before_action :get_asana_info
   respond_to :html
 
   def index
@@ -35,6 +35,7 @@ class RequestsController < ApplicationController
     @request.email = @user.email
     task_id = Asana.create_task(@workspace, @project, request_params[:title])
     @request.task_id = task_id
+    Asana.create_comment(task_id, request_params[:details])
     if @request.save
       if params[:request][:images]
         params[:request][:images].each { |image|
@@ -61,7 +62,7 @@ class RequestsController < ApplicationController
       asana_comments = Asana.get_comments(@request.task_id)
       if !asana_comments.nil?
         asana_comments["data"].each do |comment|
-          if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty?
+          if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty? && comment["text"] != @request.details
             Comment.create!(:created_at => comment["created_at"], :body => comment["text"], 
               :user_name => comment["created_by"]["name"], :request_id => @request.id, 
               :story_id => comment["id"].to_s)

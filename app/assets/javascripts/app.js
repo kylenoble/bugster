@@ -3,6 +3,6 @@ $(".comments-button").on("click", function() {
 	$(".comments-button").css("display", "none");
 });
 
-$(".bug-submit, .comment-submit").on("click", function() {
+$(".bug-submit, .comment-submit, .request-submit").on("click", function() {
 	Pace.restart();
 });

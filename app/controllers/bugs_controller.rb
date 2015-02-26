@@ -27,15 +27,16 @@ class BugsController < ApplicationController
     @bug = Bug.new(bug_params)
     task_id = Asana.create_task(@workspace, @project, bug_params[:title])
     @bug.task_id = task_id
+    Asana.create_comment(task_id, bug_params[:details])
     if @bug.save
       if params[:bug][:images]
         params[:bug][:images].each { |image|
           @bug.images.create(image: image)
+          Asana.create_attachment(task_id, image)
         }
       end
     end
-    BugCreator.send_bug_notifier_email(@bug)
-
+    #BugCreator.send_bug_notifier_email(@bug)
     respond_with(@bug)
   end
 
@@ -55,7 +56,7 @@ class BugsController < ApplicationController
         asana_comments = Asana.get_comments(@bug.task_id)
         if !asana_comments.nil?
           asana_comments["data"].each do |comment|
-            if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty?
+            if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty? && comment["text"] != @bug.details
               Comment.create!(:created_at => comment["created_at"], :body => comment["text"], 
                 :user_name => comment["created_by"]["name"], :bug_id => @bug.id, 
                 :story_id => comment["id"].to_s)

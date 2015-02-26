@@ -31,6 +31,7 @@ gem 'daemons'
 gem "figaro"
 gem 'kaminari'
 gem 'sendgrid'
+gem 'faraday'
 
 group :development do
   gem "bundler-audit"
