@@ -24,10 +24,10 @@ class CommentsController < ApplicationController
     @comment.save
     if !@comment.bug_id
       Asana.create_comment(@comment.request.task_id, comment_params["body"])
-      RequestCommentCreator.send_request_comment_notifier_email(@comment).deliver
+      #RequestCommentCreator.send_request_comment_notifier_email(@comment).deliver
     else 
       Asana.create_comment(@comment.bug.task_id, comment_params["body"])
-      CommentCreator.send_comment_notifier_email(@comment).deliver
+      #CommentCreator.send_comment_notifier_email(@comment).deliver
     end
     respond_type
   end
