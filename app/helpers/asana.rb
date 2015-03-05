@@ -7,7 +7,8 @@ class Asana
       "data" => {
         "workspace" => workspace,
         "name" => name,
-        "projects" => [project]
+        "projects" => [project], 
+        "assignee" => '11578171723085'
       }
     }
 
@@ -47,7 +48,7 @@ class Asana
     if body['errors'] then
       puts "error: #{body['errors'][0]['message']}"
     else
-      return "Comment Created"
+      return body['data']['id']
     end
   end
 

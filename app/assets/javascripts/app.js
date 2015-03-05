@@ -1,8 +1,10 @@
-$(".comments-button").on("click", function() {
-	$(".comments-form").css("display","block");
-	$(".comments-button").css("display", "none");
-});
+$( document ).ready(function() {
+	$(".comments-button").on("click", function() {
+		$(".comments-form").toggle();
+		$(".comments-button").toggle();
+	});
 
-$(".bug-submit, .comment-submit, .request-submit").on("click", function() {
-	Pace.restart();
+	$(".bug-submit, .comment-submit, .request-submit").on("click", function() {
+		Pace.restart();
+	});
 });
