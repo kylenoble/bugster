@@ -26,7 +26,7 @@
             <td><%= bug.category %></td>
             <td colspan="2"><%= bug.title %></td>
             <td><%= bug.push_date %></td>
-            <td colspan="2"><%= bug.email %></td>
+            <td colspan="2"><%= bug.email.split(',').first %></td>
             <td class="table-button"><%= link_to 'Show', bug, {:style=>'text-align:center; margin-top:1rem; margin-left: -1rem;', :class => "button"} %></td>
           </tr>
         <% end %>

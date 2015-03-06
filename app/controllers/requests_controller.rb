@@ -31,7 +31,6 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
     @request.user_id = @user.id
     @request.org = @user.org
-    @request.email = @user.email
     task_id = Asana.create_task(@workspace, @project, request_params[:title])
     @request.task_id = task_id
     Asana.create_comment(task_id, request_params[:details])

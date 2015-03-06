@@ -3,6 +3,9 @@ class RequestCreator < ActionMailer::Base
 
   def send_request_notifier_email(request)
     @request = request
-    mail( :to => @request.email, :subject => 'Thanks for adding a request!' )
+    emails = @request.email.split(',')
+    emails.each do |email|
+    	mail( :to => email, :subject => 'Thanks for finding a Bug!' ).deliver
+    end
   end
 end

@@ -3,6 +3,9 @@ class BugCreator < ActionMailer::Base
 
   def send_bug_notifier_email(bug)
     @bug = bug
-    mail( :to => @bug.email, :subject => 'Thanks for finding a Bug!' )
+    emails = @bug.email.split(',')
+    emails.each do |email|
+    	mail( :to => email, :subject => 'Thanks for finding a Bug!' )
+    end
   end
 end

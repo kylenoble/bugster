@@ -6,11 +6,11 @@
   </head>
   <body>
   	<div class="container">
-	    <h1>A response has been added to your request. </h1>
-	    <h4>Please take the time to review the reponse below: </h5><br>
-      <p><%= @comment.body %></p> <br>
-      <h4>You can respond by clicking <a href="<%= request_url(@comment.request) %>#comment<%= @comment.id %>">here</a>.</h4><br>
-	    <h5>Thanks,</h5>
+	    <h4>A response has been added to your request. </h4>
+	    <p>Please take the time to review the reponse below: </p><br>
+      <h4><%= @comment.body %></h4> <br>
+      <p>You can respond by clicking <a href="<%= request_url(@comment.request) %>#comment<%= @comment.id %>">here</a>.</p><br>
+	    <h5>Thanks,</p>
 	    <h5>Ignite Media Team</p>
     </div>
   </body>

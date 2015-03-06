@@ -3,6 +3,9 @@ class RequestCommentCreator < ActionMailer::Base
 
   def send_request_comment_notifier_email(comment)
   	@comment = comment
-    mail( :to => @comment.request.email, :subject => 'A Comment has been added to your Request!' )
+    emails = @comment.request.email.split(',')
+    emails.each do |email|
+    	mail( :to => email, :subject => 'A Comment has been added to your Bug!' ).deliver
+    end
   end
 end

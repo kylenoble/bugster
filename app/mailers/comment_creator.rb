@@ -3,7 +3,9 @@ class CommentCreator < ActionMailer::Base
 
   def send_comment_notifier_email(comment)
   	@comment = comment
-    mail( :to => @comment.bug.email, :subject => 'A Comment has been added to your Bug!' )
+    emails = @comment.bug.email.split(',')
+    emails.each do |email|
+    	mail( :to => email, :subject => 'A Comment has been added to your Bug!' ).deliver
+    end
   end
-  handle_asynchronously :send_comment_notifier_email, :priority => 20
 end
