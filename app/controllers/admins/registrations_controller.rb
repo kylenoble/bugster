@@ -8,9 +8,22 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    if admin_params[:admin_secret] == ENV["ADMIN_SECRET"]
+      @admin = Admin.create(admin_params)
+      @admin.valid?
+      if @admin.save! && admin_params[:admin_secret] == ENV["ADMIN_SECRET"]
+        sign_in(@admin)
+        redirect_to "/"
+      else
+        flash[:alert] = "Error occurred. Please try again."
+        redirect_to "/admins/sign_up"
+      end
+    else
+      flash[:alert] = "Admin secret incorrect. Please try again."
+      redirect_to "/admins/sign_up"
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -36,12 +49,11 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
-  # You can put the params you want to permit in the empty array.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.for(:sign_up) << :attribute
-  # end
+    def admin_params
+      params.require(:admin).permit(:email, :password, :password_confirmation, :remember_me, :name, :admin_secret)
+    end
 
   # You can put the params you want to permit in the empty array.
   # def configure_account_update_params

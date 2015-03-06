@@ -14,7 +14,6 @@ class RequestsController < ApplicationController
   end
 
   def show
-    update_comments
     @comments = @request.comments.all
     @comment = @request.comments.build
     respond_with(@request)
@@ -43,6 +42,7 @@ class RequestsController < ApplicationController
         }
       end
     end
+    RequestCreator.send_request_notifier_email(@request).deliver
     respond_with(@request)
   end
 
@@ -57,19 +57,6 @@ class RequestsController < ApplicationController
   end
 
   private
-
-    def update_comments
-      asana_comments = Asana.get_comments(@request.task_id)
-      if !asana_comments.nil?
-        asana_comments["data"].each do |comment|
-          if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty? && comment["text"] != @request.details
-            Comment.create!(:created_at => comment["created_at"], :body => comment["text"], 
-              :user_name => comment["created_by"]["name"], :request_id => @request.id, 
-              :story_id => comment["id"].to_s)
-          end
-        end
-      end
-    end
 
     def get_asana_info
       @workspace = 11578168261560

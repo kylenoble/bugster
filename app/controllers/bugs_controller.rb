@@ -1,15 +1,19 @@
 class BugsController < ApplicationController
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
   before_action :get_asana_info
+  before_action :check_login, only: [:index, :show, :edit, :update, :destroy]
   respond_to :html
 
   def index
-    @bugs = Bug.order(:created_at).page params[:page]
-    respond_with(@bugs)
+    if admin_signed_in?
+      @bugs = Bug.order(:created_at).page params[:page]
+    else
+      @bugs = Bug.order(:created_at).where("org = ?", @user.org).page params[:page]
+    end
+    respond_with(@bug)
   end
 
   def show
-    update_comments
     @comments = @bug.comments.all.order("created_at asc")
     @comment = @bug.comments.build
     respond_with(@bug)
@@ -36,7 +40,7 @@ class BugsController < ApplicationController
         }
       end
     end
-    #BugCreator.send_bug_notifier_email(@bug)
+    BugCreator.send_bug_notifier_email(@bug).deliver
     respond_with(@bug)
   end
 
@@ -52,17 +56,12 @@ class BugsController < ApplicationController
 
   private
 
-    def update_comments
-        asana_comments = Asana.get_comments(@bug.task_id)
-        if !asana_comments.nil?
-          asana_comments["data"].each do |comment|
-            if comment["type"] == "comment" && Comment.where("story_id = ? ", comment["id"].to_s).empty? && comment["text"] != @bug.details
-              Comment.create!(:created_at => comment["created_at"], :body => comment["text"], 
-                :user_name => comment["created_by"]["name"], :bug_id => @bug.id, 
-                :story_id => comment["id"].to_s)
-            end
-          end
-        end
+    def check_login
+      if user_signed_in? || admin_signed_in?
+        @user = current_user
+      else 
+        redirect_to :login
+      end
     end
 
     def get_asana_info
