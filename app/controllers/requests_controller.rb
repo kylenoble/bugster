@@ -38,10 +38,11 @@ class RequestsController < ApplicationController
       if params[:request][:images]
         params[:request][:images].each { |image|
           @request.images.create(image: image)
+          Asana.create_attachment(task_id, image)
         }
       end
     end
-    RequestCreator.send_request_notifier_email(@request).deliver
+    RequestCreator.delay.send_request_notifier_email(@request)
     respond_with(@request)
   end
 

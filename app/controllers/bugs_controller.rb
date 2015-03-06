@@ -40,7 +40,7 @@ class BugsController < ApplicationController
         }
       end
     end
-    BugCreator.send_bug_notifier_email(@bug).deliver
+    BugCreator.delay.send_bug_notifier_email(@bug)
     respond_with(@bug)
   end
 
@@ -55,7 +55,7 @@ class BugsController < ApplicationController
   end
 
   private
-  
+
     def check_login
       if user_signed_in? || admin_signed_in?
         @user = current_user

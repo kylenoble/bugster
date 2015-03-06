@@ -5,7 +5,7 @@ class BugCreator < ActionMailer::Base
     @bug = bug
     emails = @bug.email.split(',')
     emails.each do |email|
-    	mail( :to => email, :subject => 'Thanks for finding a Bug!' )
+    	mail( :to => email, :subject => 'Thanks for adding a Support Ticket!' ).deliver
     end
   end
 end
