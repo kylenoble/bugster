@@ -32,7 +32,7 @@ gem "figaro"
 gem 'kaminari'
 gem 'sendgrid'
 gem 'faraday'
-gem "hirefire-resource"
+gem 'hirefire-resource'
 
 group :development do
   gem "bundler-audit"
