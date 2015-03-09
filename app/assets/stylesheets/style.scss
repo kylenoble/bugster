@@ -1,3 +1,5 @@
+$tabs-base-color: rgba(255,255,255,.5);
+
 body {
 	font-size: 1.3em;
 }
@@ -86,6 +88,71 @@ body {
   height: 2px;
 }
 
+.tabs { 
+  float: none;
+  list-style: none;
+  position: relative;
+  margin: 80px 0 0 10px;
+  margin-left: 0;
+  text-align: left;
+  li {
+    float: left;
+    display: block;
+    margin-bottom: 0;
+  }
+  a {
+    display: block;
+    padding: 14px 21px;
+    position: relative;
+    text-decoration: none;
+    color: black;
+    &:hover {
+	    background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+  		background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+  		background-image: -moz-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
+  		background-image: linear-gradient(to right, rgba(238,233,233,.5), rgba(238,233,233,.55));
+	    border-radius: 2px 2px 0 0;
+	  }
+  }
+  .tab-content{
+    z-index: 2;
+    display: none; 
+    overflow: hidden;
+    width: 100%;
+    font-size: 17px;
+    line-height: 25px;
+    padding: 25px;  
+    position: absolute;
+    top: 53px;
+    left: 0; 
+    background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+		background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+		background-image: -moz-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
+		background-image: linear-gradient(to right, rgba(238,233,233,.5), rgba(238,233,233,.55));
+  }
+}
+
+.tab-active { 
+  display: block;
+  padding: 14px 21px;
+  border-radius: 2px 2px 0 0;
+  background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+	background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+	background-image: -moz-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
+	background-image: linear-gradient(to right, rgba(238,233,233,.5), rgba(238,233,233,.55));
+  cursor: pointer;
+  position: relative;
+  @include transition(all 0.2s ease-in-out);
+}
+
+.tab-content {
+  background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+	background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+	background-image: -moz-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
+	background-image: linear-gradient(to right, rgba(238,233,233,.5), rgba(238,233,233,.55));
+	padding-left: 25px;
+	padding-right: 25px;
+}
 
 u {
 	text-decoration: none;

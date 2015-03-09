@@ -6,9 +6,21 @@ class BugsController < ApplicationController
 
   def index
     if admin_signed_in?
-      @bugs = Bug.order(:created_at).page params[:page]
+      if params[:status] == "completed"
+        @bugs = Bug.completed.order(:created_at).page(params[:page])
+      elsif params[:status] == "open"
+        @bugs = Bug.open.order(:created_at).page(params[:page])
+      else
+        @bugs = Bug.order(:created_at).page(params[:page])
+      end
     else
-      @bugs = Bug.order(:created_at).where("org = ?", @user.org).page params[:page]
+      if params[:status] == "completed"
+        @bugs = Bug.completed.where("org = ?", @user.org).order(:created_at).page(params[:page])
+      elsif params[:status] == "open"
+        @bugs = Bug.open.where("org = ?", @user.org).order(:created_at).page(params[:page])
+      else
+        @bugs = Bug.where("org = ?", @user.org).order(:created_at).page(params[:page])
+      end
     end
     respond_with(@bug)
   end

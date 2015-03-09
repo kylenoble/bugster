@@ -6,11 +6,23 @@ class RequestsController < ApplicationController
 
   def index
     if admin_signed_in?
-      @requests = Request.order(:created_at).page params[:page]
+      if params[:status] == "completed"
+        @requests = Request.completed.order(:created_at).page(params[:page])
+      elsif params[:status] == "open"
+        @requests = Request.open.order(:created_at).page(params[:page])
+      else
+        @requests = Request.order(:created_at).page(params[:page])
+      end
     else
-      @requests = Request.order(:created_at).where("org = ?", @user.org).page params[:page]
+      if params[:status] == "completed"
+        @requests = Request.completed.where("org = ?", @user.org).order(:created_at).page(params[:page])
+      elsif params[:status] == "open"
+        @requests = Request.open.where("org = ?", @user.org).order(:created_at).page(params[:page])
+      else
+        @requests = Request.where("org = ?", @user.org).order(:created_at).page(params[:page])
+      end
     end
-    respond_with(@requests)
+    respond_with(@bug)
   end
 
   def show

@@ -7,6 +7,7 @@
   <title><%= title %></title>
   <link rel="stylesheet" type="text/css" href="/assets/application-0898c128b5a4a74270991c9832c8749d.css">
   <script type="text/javascript" src="/assets/application-73763660c2a072c37b809444063b1ea8.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= body_class %>">
@@ -68,10 +69,11 @@
 
        if ( menuPosition <= contentPosition ) {
          $(".nav").show();
+         $("h1").show();
        } else {
          $(".nav").hide();
+         $("h1").hide();
        } 
-
     });
   });
   </script>
