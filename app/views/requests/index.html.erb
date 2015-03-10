@@ -5,9 +5,9 @@
     </div>
   </div>
   <ul class="row tabs">
-    <li class="three columns" id="tab1"><%= link_to 'All', requests_path, {:style=>'text-align:center; margin-top: 20px;'} %></li>
-    <li class="three columns" id="tab2"><%= link_to 'Open Only', {:status => "open"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
-    <li class="three columns" id="tab3"><%= link_to 'Completed Only', {:status => "completed"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
+    <li class="two columns" id="tab1"><%= link_to 'All', requests_path, {:style=>'text-align:center; margin-top: 20px;'} %></li>
+    <li class="two columns" id="tab2"><%= link_to 'Open', {:status => "open"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
+    <li class="two columns" id="tab3"><%= link_to 'Completed', {:status => "completed"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
   </ul>
   <div class="twelve columns tab-content">
     <table class="u-full-width">

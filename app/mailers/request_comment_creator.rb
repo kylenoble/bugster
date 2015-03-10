@@ -5,7 +5,7 @@ class RequestCommentCreator < ActionMailer::Base
   	@comment = comment
     emails = @comment.request.email.split(',')
     emails.each do |email|
-    	mail( :to => email, :subject => 'A Comment has been added to your Bug!' ).deliver
+    	mail( :to => email, :subject => 'A Comment has been added to your Request!' )
     end
   end
 end

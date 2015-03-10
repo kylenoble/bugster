@@ -21,6 +21,8 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
 
+    @comment.story_id = @story_id
+    @comment.save
     if !@comment.bug_id
       @story_id = Asana.create_comment(@comment.request.task_id, comment_params["body"])
       RequestCommentCreator.delay.send_request_comment_notifier_email(@comment)
@@ -28,8 +30,6 @@ class CommentsController < ApplicationController
       @story_id = Asana.create_comment(@comment.bug.task_id, comment_params["body"])
       CommentCreator.delay.send_comment_notifier_email(@comment)
     end
-    @comment.story_id = @story_id
-    @comment.save
     respond_type
   end
 

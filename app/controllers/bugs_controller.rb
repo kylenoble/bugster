@@ -1,7 +1,7 @@
 class BugsController < ApplicationController
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
   before_action :get_asana_info
-  before_action :check_login, only: [:index, :show, :edit, :update, :destroy]
+  before_action :check_login, only: [:index, :edit, :update, :destroy]
   respond_to :html
 
   def index

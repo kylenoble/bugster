@@ -5,7 +5,7 @@ class RequestCreator < ActionMailer::Base
     @request = request
     emails = @request.email.split(',')
     emails.each do |email|
-    	mail( :to => email, :subject => 'Thanks for finding a Bug!' ).deliver
+    	mail( :to => email, :subject => 'Thanks for adding a Request!' )
     end
   end
 end
