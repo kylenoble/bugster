@@ -36,6 +36,7 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.9)
+    bonsai-elasticsearch-rails (0.0.4)
     bourbon (3.2.4)
       sass (~> 3.2)
       thor
@@ -293,6 +294,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   aws-sdk
+  bonsai-elasticsearch-rails
   bourbon (~> 3.2.1)
   bundler-audit
   byebug
