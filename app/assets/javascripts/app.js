@@ -18,4 +18,15 @@ $( document ).ready(function() {
 		$("tabs a").removeClass("tab-active");
 		$("#tab1 a").addClass("tab-active");
 	}
+
+	$('#bugsearch').on('click',function(){
+    var word = $('#search_').val();
+    $(this).attr("href","/tickets?search_term=" + word.toString());
+	});
+
+	$('#requestsearch').on('click',function(){
+    var word = $('#search_').val();
+    $(this).attr("href","/requests?search_term=" + word.toString());
+	});
+
 });

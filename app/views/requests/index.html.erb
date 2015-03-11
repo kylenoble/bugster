@@ -8,6 +8,12 @@
     <li class="two columns" id="tab1"><%= link_to 'All', requests_path, {:style=>'text-align:center; margin-top: 20px;'} %></li>
     <li class="two columns" id="tab2"><%= link_to 'Open', {:status => "open"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
     <li class="two columns" id="tab3"><%= link_to 'Completed', {:status => "completed"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
+    <div class="three columns offset-by-two">
+      <div class="field search">
+        <%= text_field :search, '' %>
+      </div>
+    </div>
+    <li class="one column search"><%= link_to 'Search', '', {:style=>'padding: 0px; text-align:center; margin-left: -3rem;', :class => "button", :id => "requestsearch"} %></li>
   </ul>
   <div class="twelve columns tab-content">
     <table class="u-full-width">

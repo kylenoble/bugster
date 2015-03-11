@@ -33,6 +33,8 @@ gem 'kaminari'
 gem 'sendgrid'
 gem 'faraday'
 gem 'hirefire-resource'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :development do
   gem "bundler-audit"

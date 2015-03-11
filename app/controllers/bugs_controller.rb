@@ -5,21 +5,29 @@ class BugsController < ApplicationController
   respond_to :html
 
   def index
-    if admin_signed_in?
-      if params[:status] == "completed"
-        @bugs = Bug.completed.order(:created_at).page(params[:page])
-      elsif params[:status] == "open"
-        @bugs = Bug.open.order(:created_at).page(params[:page])
+    if params[:search_term].nil?
+      if admin_signed_in?
+        if params[:status] == "completed"
+          @bugs = Bug.completed.order(:created_at).page(params[:page])
+        elsif params[:status] == "open"
+          @bugs = Bug.open.order(:created_at).page(params[:page])
+        else
+          @bugs = Bug.order(:created_at).page(params[:page])
+        end
       else
-        @bugs = Bug.order(:created_at).page(params[:page])
+        if params[:status] == "completed"
+          @bugs = Bug.completed.where("org = ?", @user.org).order(:created_at).page(params[:page])
+        elsif params[:status] == "open"
+          @bugs = Bug.open.where("org = ?", @user.org).order(:created_at).page(params[:page])
+        else
+          @bugs = Bug.where("org = ?", @user.org).order(:created_at).page(params[:page])
+        end
       end
     else
-      if params[:status] == "completed"
-        @bugs = Bug.completed.where("org = ?", @user.org).order(:created_at).page(params[:page])
-      elsif params[:status] == "open"
-        @bugs = Bug.open.where("org = ?", @user.org).order(:created_at).page(params[:page])
+      if admin_signed_in?
+        @bugs = Bug.search(params[:search_term]).records.page(params[:page])
       else
-        @bugs = Bug.where("org = ?", @user.org).order(:created_at).page(params[:page])
+        @bugs = Bug.search(params[:search_term]).records.where("org = ?", @user.org).page(params[:page])
       end
     end
     respond_with(@bug)
@@ -86,6 +94,6 @@ class BugsController < ApplicationController
     end
 
     def bug_params
-      params.require(:bug).permit(:title, :details, :bugster, :email, :org, :status, :category, :push_date, images: [:image])
+      params.require(:bug).permit(:title, :details, :bugster, :email, :org, :status, :category, :push_date, :search_term, images: [:image])
     end
 end

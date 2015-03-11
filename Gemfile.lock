@@ -94,6 +94,19 @@ GEM
       json
       thread
       thread_safe
+    elasticsearch (1.0.6)
+      elasticsearch-api (= 1.0.6)
+      elasticsearch-transport (= 1.0.6)
+    elasticsearch-api (1.0.6)
+      multi_json
+    elasticsearch-model (0.1.6)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
+    elasticsearch-rails (0.1.6)
+    elasticsearch-transport (1.0.6)
+      faraday
+      multi_json
     email_validator (1.5.0)
       activemodel
     erubis (2.7.0)
@@ -114,6 +127,7 @@ GEM
       activesupport
       capybara
       i18n
+    hashie (3.3.2)
     high_voltage (2.2.1)
     highline (1.6.21)
     hike (1.2.3)
@@ -289,6 +303,8 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   dotenv-rails
+  elasticsearch-model
+  elasticsearch-rails
   email_validator
   factory_girl_rails
   faker
