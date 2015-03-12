@@ -96,6 +96,6 @@ class RequestsController < ApplicationController
     end
 
     def request_params
-      params.require(:request).permit(:title, :details, :email, :user_id, :org, :status, :category, :push_date, :search_term , images: [:image])
+      params.require(:request).permit(:title, :details, :email, :priority, :requestor, :user_id, :org, :status, :category, :push_date, :search_term , images: [:image])
     end
 end

@@ -13,13 +13,27 @@
     <div class="six columns">
       <div class="field">
         <%= f.label :title %><br>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, :placeholder => "Enter Your Title" %>
       </div>
     </div>
     <div class="six columns offset by two">
       <div class="field">
-        <%= f.label :email %>(Separate multiple email addresses with a ',')<br>
-        <%= f.text_field :email, :required => true %>
+        <%= f.label :email %><br>
+        <%= f.text_field :email, :required => true, :placeholder => "Separate multiple email addresses with a ','" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns offset by two">
+      <div class="field">
+        <%= f.label :reporter %><br>
+        <%= f.text_field :reporter, :required => true, :placeholder => "Enter Your Full Name" %>
+      </div>
+    </div>
+    <div class="six columns">
+      <div class="field">
+        <%= f.label :priority %><br>
+        <%= f.select(:priority, options_for_select(["High", "Medium", "Low", "App Down", "Critical"]), {}, { :class => 'u-full-width' } ) %>
       </div>
     </div>
   </div>
@@ -27,7 +41,7 @@
     <div class="six columns offset by two">
       <div class="field">
         <%= f.label :org %><br>
-        <%= f.text_field :org, :required => true %>
+        <%= f.text_field :org, :required => true, :placeholder => "Enter Your Org Number" %>
       </div>
     </div>
     <div class="six columns">
@@ -42,7 +56,7 @@
     <div class="six columns offset by two">
       <div class="field">
         <%= f.label :bugster %><br>
-        <%= f.text_field :bugster %>
+        <%= f.text_field :bugster, :placeholder => "Name of Dev working on the issue" %>
       </div>
     </div>
     <div class="six columns">

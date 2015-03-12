@@ -14,13 +14,27 @@
     <div class="six columns">
       <div class="field">
         <%= f.label :title %><br>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, :placeholder => "Enter Your Title" %>
       </div>
     </div>
     <div class="six columns">
       <div class="field">
         <%= f.label :category %><br>
         <%= f.select(:category, options_for_select(["Email", "Chat", "Social", "SMS", "Admin"]), {}, { :class => 'u-full-width' } ) %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns offset by two">
+      <div class="field">
+        <%= f.label :requestor %><br>
+        <%= f.text_field :requestor, :required => true, :placeholder => "Enter Your Full Name" %>
+      </div>
+    </div>
+    <div class="six columns">
+      <div class="field">
+        <%= f.label :priority %><br>
+        <%= f.select(:priority, options_for_select(["High", "Medium", "Low", "App Down", "Critical"]), {}, { :class => 'u-full-width' } ) %>
       </div>
     </div>
   </div>
@@ -40,8 +54,8 @@
   <% end %>
   <div class="twelve columns">
     <div class="field">
-      <%= f.label :email %>(Separate multiple email addresses with a ',')<br>
-      <%= f.text_field :email, :required => true %>
+      <%= f.label :email %><br>
+      <%= f.text_field :email, :required => true, :placeholder => "Separate multiple email addresses with a ','" %>
     </div>
   </div>
   <div class="row">

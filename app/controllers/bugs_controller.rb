@@ -94,6 +94,6 @@ class BugsController < ApplicationController
     end
 
     def bug_params
-      params.require(:bug).permit(:title, :details, :bugster, :email, :org, :status, :category, :push_date, :search_term, images: [:image])
+      params.require(:bug).permit(:title, :details, :priority, :reporter, :bugster, :email, :org, :status, :category, :push_date, :search_term, images: [:image])
     end
 end
