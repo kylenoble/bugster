@@ -53,7 +53,7 @@ class RequestsController < ApplicationController
     @request.org = @user.org
     task_id = Asana.create_task(@workspace, @project, request_params[:title])
     @request.task_id = task_id
-    Asana.create_comment(task_id, request_params[:details])
+    Asana.create_comment(task_id, create_detailed_comment)
     if @request.save
       if params[:request][:images]
         params[:request][:images].each { |image|
@@ -81,6 +81,10 @@ class RequestsController < ApplicationController
     def get_asana_info
       @workspace = 11578168261560
       @project = 26598858855779
+    end
+
+    def create_detailed_comment
+      return "Org- #{request_params[:org]}" + " Reporter- #{request_params[:requestor]} --> " + request_params[:details] 
     end
 
     def check_login

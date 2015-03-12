@@ -4,9 +4,12 @@ class BugCreator < ActionMailer::Base
   def send_bug_notifier_email(bug)
     @bug = bug
     emails = @bug.email.split(',')
-    puts emails.count
     emails.each do |email|
-    	mail( :to => email, :subject => 'Thanks for adding a Support Ticket!' ).deliver
+    	if @bug.priority == "Outage"
+    		mail( :to => email, :subject => 'OUTAGE-- Thanks for Reporting An Outage' ).deliver
+    	else
+    		mail( :to => email, :subject => 'Thanks for adding a Support Ticket!' ).deliver
+    	end	
     end
   end
 end

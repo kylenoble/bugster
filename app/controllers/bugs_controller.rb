@@ -51,7 +51,8 @@ class BugsController < ApplicationController
     @bug = Bug.new(bug_params)
     task_id = Asana.create_task(@workspace, @project, bug_params[:title])
     @bug.task_id = task_id
-    Asana.create_comment(task_id, bug_params[:details])
+    Asana.create_comment(task_id, create_detailed_comment)
+    outage_reported(@bug)
     if @bug.save
       if params[:bug][:images]
         params[:bug][:images].each { |image|
@@ -82,6 +83,16 @@ class BugsController < ApplicationController
       else 
         redirect_to :login
       end
+    end
+
+    def outage_reported(bug)
+      if bug.priority == "Outage"
+        @bug.email += ", knoble@ignitemedia.com, hdobariya@ignitemedia.com, sandy@ignitemedia.com"
+      end
+    end
+
+    def create_detailed_comment
+      return "Org- #{bug_params[:org]}" + " Reporter- #{bug_params[:reporter]} --> " + bug_params[:details] 
     end
 
     def get_asana_info
