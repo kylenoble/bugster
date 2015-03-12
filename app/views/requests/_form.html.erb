@@ -34,7 +34,7 @@
     <div class="six columns">
       <div class="field">
         <%= f.label :priority %><br>
-        <%= f.select(:priority, options_for_select(["High", "Medium", "Low", "App Down", "Critical"]), {}, { :class => 'u-full-width' } ) %>
+        <%= f.select(:priority, options_for_select(["Non-Service Impact", "Business Impact", "Severe Business Impact", "Outage"]), {}, { :class => 'u-full-width' } ) %>
       </div>
     </div>
   </div>

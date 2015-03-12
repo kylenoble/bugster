@@ -12,6 +12,24 @@
 <div class="row">
   <div class="twelve columns">
     <p>
+      <strong><u>Request ID:</u></strong>
+      <%= @request.id %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Status:</u></strong>
+      <%= @request.status %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Priority:</u></strong>
+      <%= @request.priority %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
       <strong><u>Push Date:</u></strong>
       <%= @request.push_date %>
     </p>
@@ -24,18 +42,18 @@
   </div>
   <div class="twelve columns">
     <p>
-      <strong><u>Email:</u></strong>
+      <strong><u>Requestor:</u></strong>
+      <%= @request.requestor %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Email(s):</u></strong>
       <%= @request.email %>
     </p>
   </div>
 </div>
 <div class="row">
-  <div class="twelve columns">
-    <p>
-      <strong><u>Status:</u></strong>
-      <%= @request.status %>
-    </p>
-  </div>
   <div class="twelve columns">
     <p>
       <strong><u>Category:</u></strong>

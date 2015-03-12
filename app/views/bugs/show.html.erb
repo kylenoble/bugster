@@ -12,8 +12,38 @@
 <div class="row">
   <div class="twelve columns">
     <p>
+      <strong><u>Ticket ID:</u></strong>
+      <%= @bug.id %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Status:</u></strong>
+      <%= @bug.status %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Priority:</u></strong>
+      <%= @bug.priority %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
       <strong><u>Push Date:</u></strong>
       <%= @bug.push_date %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Reporter:</u></strong>
+      <%= @bug.reporter %>
+    </p>
+  </div>
+  <div class="twelve columns">
+    <p>
+      <strong><u>Email(s):</u></strong>
+      <%= @bug.email %>
     </p>
   </div>
   <div class="twelve columns">
@@ -24,12 +54,6 @@
   </div>
 </div>
 <div class="row">
-  <div class="twelve columns">
-    <p>
-      <strong><u>Status:</u></strong>
-      <%= @bug.status %>
-    </p>
-  </div>
   <div class="twelve columns">
     <p>
       <strong><u>Category:</u></strong>
