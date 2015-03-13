@@ -17,7 +17,7 @@
         <%= link_to 'New request', new_request_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
       </div>
       <div class="one column offset-by-two">
-        <%= link_to 'View Support Tickets', bugs_path, {:style=>'text-align:center; margin-top: 1rem;', :class => "button"} %>
+        <%= link_to 'Support Tickets', bugs_path, {:style=>'text-align:center; margin-top: 1rem;', :class => "button"} %>
       </div>
       <div class="one column offset-by-five">
         <% if user_signed_in? %>
@@ -29,10 +29,10 @@
         <% end %>
       </div>
     <% elsif request.path == "/tickets" %>
-      <div class="two columns offset-by-one">
-        <%= link_to 'New Support Ticket', new_bug_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
-      </div>
       <div class="one column offset-by-one">
+        <%= link_to 'New Ticket', new_bug_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+      </div>
+      <div class="one column offset-by-two">
         <%= link_to 'View Requests', requests_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
       </div>
       <div class="one column offset-by-five">

@@ -164,8 +164,38 @@ u {
 	border-bottom: 1px solid black;
 }
 
+@media only screen and (max-width: 600px)  {
+	.container {
+		margin-top: 17%;
+	}
+
+	button {
+		max-width: 50px !important;
+	}
+}
+
+@media only screen and (max-width: 950px) and (min-width: 601px) {
+	.container {
+		margin-top: 10%;
+	}
+} 
+
+@media only screen and (max-width: 850px) {
+	.search {
+		display: none;
+	}
+
+	#bugsearch {
+		display: none;
+	}
+
+	#requestsearch {
+		display: none;
+	}
+} 
+
 @media only screen and (max-width: 915px)  {
-	
+
 	/* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr { 
 		display: block; 
