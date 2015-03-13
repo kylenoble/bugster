@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   devise_for :users, module: 'users' 
   resources :comments
 
+  get "how-to", to: "how_to#index"
+
   resources :bugs, :path => 'tickets'
   devise_scope :user do
   	get "sign_in", to: "users/sessions#new", :as => :login

@@ -2,8 +2,15 @@
 	<div class="row">
 		<h1>Decision 7 Support</h1>
 	</div>
-	<div class="twelve columns"><%= link_to 'View Support Tickets', bugs_path, {:style=>'text-align:center; margin-top: 20px;', :class => "button"} %></div>
-	<div class="twelve columns"><%= link_to 'View Requests', requests_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %></div>
+	<div class="twelve columns">
+		<%= link_to 'View Support Tickets', bugs_path, {:style=>'text-align:center; margin-top: 20px;', :class => "button"} %>
+	</div>
+	<div class="twelve columns">
+		<%= link_to 'View Requests', requests_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+	</div><br>
+	<div class="twelve columns">
+		<u><%= link_to 'How To', "/how-to", {:style=>'text-align:center; margin-top:3rem; color: black;'} %></u>
+	</div>
 </div>
 <script type="text/javascript">
 	$(".container").removeClass("container");
