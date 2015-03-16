@@ -4,8 +4,9 @@ class CommentCreator < ActionMailer::Base
   def send_comment_notifier_email(comment)
   	@comment = comment
     emails = @comment.bug.email.split(',')
+    subject = "A comment has been added to: #{@comment.bug.title}. Ticket ##{@comment.bug.id}"
     emails.each do |email|
-    	mail( :to => email, :subject => 'A Comment has been added to your Support Ticket!' ).deliver
+    	mail( :to => email, :subject => subject ).deliver
     end
   end
 end
