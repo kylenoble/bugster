@@ -84,7 +84,7 @@ class RequestsController < ApplicationController
     end
 
     def create_detailed_comment
-      return "Org- #{@request.org]}" + " Reporter- #{@request.requestor} --> " + @request.details 
+      return "Org- #{@request.org}" + " Reporter- #{@request.requestor} --> " + @request.details 
     end
 
     def check_login
