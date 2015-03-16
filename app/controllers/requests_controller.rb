@@ -53,7 +53,6 @@ class RequestsController < ApplicationController
     @request.org = @user.org
     task_id = Asana.create_task(@workspace, @project, request_params[:title])
     @request.task_id = task_id
-    Asana.create_comment(task_id, create_detailed_comment)
     if @request.save
       if params[:request][:images]
         params[:request][:images].each { |image|
@@ -62,6 +61,7 @@ class RequestsController < ApplicationController
         }
       end
     end
+    Asana.delay.create_comment(@request.task_id, create_detailed_comment)
     RequestCreator.delay.send_request_notifier_email(@request)
     respond_with(@request)
   end
@@ -84,7 +84,7 @@ class RequestsController < ApplicationController
     end
 
     def create_detailed_comment
-      return "Org- #{request_params[:org]}" + " Reporter- #{request_params[:requestor]} --> " + request_params[:details] 
+      return "Org- #{@request.org]}" + " Reporter- #{@request.requestor} --> " + @request.details 
     end
 
     def check_login

@@ -22,12 +22,19 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     @comment.story_id = @story_id
-    @comment.save
+    if @comment.save
+      if params[:comment][:images]
+        params[:comment][:images].each { |image|
+          @comment.images.create(image: image)
+        }
+      end
+    end
+
     if !@comment.bug_id
-      @story_id = Asana.create_comment(@comment.request.task_id, comment_params["body"])
+      Asana.delay.create_comment(@comment.request.task_id, comment_params["body"])
       RequestCommentCreator.delay.send_request_comment_notifier_email(@comment)
     else 
-      @story_id = Asana.create_comment(@comment.bug.task_id, comment_params["body"])
+      Asana.delay.create_comment(@comment.bug.task_id, comment_params["body"])
       CommentCreator.delay.send_comment_notifier_email(@comment)
     end
     respond_type
@@ -58,6 +65,6 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-      params.require(:comment).permit(:user_name, :body, :bug_id, :request_id)
+      params.require(:comment).permit(:user_name, :body, :bug_id, :request_id, images: [:image])
     end
 end

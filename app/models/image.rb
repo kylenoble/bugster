@@ -1,6 +1,11 @@
 class Image < ActiveRecord::Base
 	belongs_to :bug
 	belongs_to :request
+	belongs_to :comment
+
+	def image_contents
+    self.copy_to_local_file.read
+  end
 
 	has_attached_file :image, :styles => { :lrg => "700x700>", :med => "350x350>"}, :whiny => false,
 			      :storage => :s3,

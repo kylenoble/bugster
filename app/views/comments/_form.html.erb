@@ -23,6 +23,12 @@
     <%= f.label :body %><br>
     <%= f.text_area :body %>
   </div>
+  <div class="row">
+    <div class="twelve columns">
+      <%= f.label :images %>
+      <%= f.file_field :images, type: :file, multiple: true %>
+    </div>
+  </div>
   <%= f.hidden_field :bug_id %>
   <%= f.hidden_field :request_id %>
   <div class="actions">

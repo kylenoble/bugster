@@ -91,6 +91,20 @@
         <a name="comment<%= comment.id %>"></a>
         <strong><u><%= comment.user_name %></u></strong> 
         <i class="comment-date"><%= time_ago_in_words(comment.created_at) + " Ago" %></i>
+        <% if comment.images.exists? %>
+          <div class="row">
+            <div class="twelve columns">
+              <div class="image-row">
+                  <div class="image-set">
+                    <p><strong><u>Images:</u></strong></p>
+                    <% comment.images.each do |image| %>
+                        <a class="without-caption image-link" data-lightbox="image-1" rel="shadowbox" href="<%=image.image.url %>" title=""><%= image_tag image.image.url(:med) %></a>
+                    <% end %>  
+                  </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
       <div class="row">
         <br/>

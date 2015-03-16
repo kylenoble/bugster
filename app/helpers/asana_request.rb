@@ -51,5 +51,4 @@ class AsanaRequest
     @res = @http.start { |http| @http.request(req) }
     return @res
   end
-
 end
