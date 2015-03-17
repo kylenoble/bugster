@@ -17,7 +17,7 @@ class Request < ActiveRecord::Base
 	      query: {
 	        multi_match: {
 	          query: query,
-	          fields: ['title^10', 'details']
+	          fields: ['title^10', 'details', 'requestor', 'email', 'category']
 	        }
 	      }
 	    }

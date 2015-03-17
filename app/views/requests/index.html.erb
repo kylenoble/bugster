@@ -24,7 +24,7 @@
           <th>Category</th>
           <th colspan="2">Title</th>
           <th>Push Date</th>
-          <th colspan="2">Email</th>
+          <th colspan="2">Requestor</th>
           <th colspan="1"></th>
         </tr>
       </thead>
@@ -37,7 +37,7 @@
             <td><%= request.category %></td>
             <td colspan="2"><%= request.title %></td>
             <td><%= request.push_date %></td>
-            <td colspan="2"><%= request.email.split(',').first %></td>
+            <td colspan="2"><%= request.requestor %></td>
             <td class="table-button"><%= link_to 'Show', request, {:style=>'text-align:center; margin-top:1rem; margin-left: -1rem;', :class => "button"} %></td>
           </tr>
         <% end %>

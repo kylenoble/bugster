@@ -24,7 +24,7 @@
           <th>Category</th>
           <th colspan="2">Title</th>
           <th>Push Date</th>
-          <th colspan="2">Email</th>
+          <th colspan="2">Reporter</th>
           <th colspan="1"></th>
         </tr>
       </thead>
@@ -37,7 +37,7 @@
             <td><%= bug.category %></td>
             <td colspan="2"><%= bug.title %></td>
             <td><%= bug.push_date %></td>
-            <td colspan="2"><%= bug.email.split(',').first %></td>
+            <td colspan="2"><%= bug.reporter %></td>
             <td class="table-button"><%= link_to 'Show', bug, {:style=>'text-align:center; margin-top:1rem; margin-left: -1rem;', :class => "button"} %></td>
           </tr>
         <% end %>
