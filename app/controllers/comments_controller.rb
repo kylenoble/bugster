@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
         Asana.delay.create_comment(@comment.bug.task_id, "comment attachment: #{image.image.url(:lrg)}")
       }
     elsif @comment.images && @comment.request_id
-      params[:comment][:images].each { |image|
+      @comment.images.each { |image|
         Asana.delay.create_comment(@comment.request.task_id, "comment attachment: #{image.image.url(:lrg)}")
       }
     end
@@ -63,7 +63,7 @@ class CommentsController < ApplicationController
   private
 
     def set_comment
-      @comment = Comment.find(params[:id])
+      @comment = Comment.find(params[:id]).includes(images: [:image])
     end
 
     def respond_type

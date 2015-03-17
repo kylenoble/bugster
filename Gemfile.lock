@@ -41,6 +41,9 @@ GEM
       sass (~> 3.2)
       thor
     builder (3.2.2)
+    bullet (4.14.4)
+      activesupport (>= 3.0.0)
+      uniform_notifier (>= 1.6.0)
     bundler-audit (0.3.1)
       bundler (~> 1.2)
       thor (~> 0.18)
@@ -280,6 +283,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    uniform_notifier (1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
     webmock (1.20.4)
@@ -296,6 +300,7 @@ DEPENDENCIES
   aws-sdk
   bonsai-elasticsearch-rails
   bourbon (~> 3.2.1)
+  bullet
   bundler-audit
   byebug
   capybara-webkit
