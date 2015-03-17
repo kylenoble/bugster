@@ -51,6 +51,7 @@ class BugsController < ApplicationController
     @bug = Bug.new(bug_params)
     task_id = Asana.create_task(@workspace, @project, bug_params[:title])
     @bug.task_id = task_id
+    Asana.create_comment(task_id, create_detailed_comment)
     outage_reported(@bug)
     if @bug.save
       if params[:bug][:images]
@@ -60,7 +61,6 @@ class BugsController < ApplicationController
         }
       end
     end
-    Asana.delay.create_comment(@bug.task_id, create_detailed_comment)
     BugCreator.delay.send_bug_notifier_email(@bug)
     respond_with(@bug)
   end

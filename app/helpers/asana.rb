@@ -24,7 +24,7 @@ class Asana
   def self.create_attachment(task_id, attachment)
     endpoint = "https://app.asana.com/api/1.0/tasks/#{task_id}/attachments"
     
-    response = AsanaRequest.new(endpoint).post_attachment_response(attachment.image_content_type, attachment.image.uploaded_file)
+    response = AsanaRequest.new(endpoint).post_attachment_response(attachment.content_type, attachment.temp_file)
     body = JSON.parse(response.body)
     if body['errors'] then
       puts "error: #{body['errors'][0]['message']}"
