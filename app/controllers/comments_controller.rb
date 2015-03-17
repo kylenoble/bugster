@@ -30,6 +30,16 @@ class CommentsController < ApplicationController
       end
     end
 
+    if @comment.images && @comment.bug_id
+      @comment.images.each { |image|
+        Asana.delay.create_comment(@comment.bug.task_id, "comment attachment: #{image.image.url(:lrg)}")
+      }
+    elsif @comment.images && @comment.request_id
+      params[:comment][:images].each { |image|
+        Asana.delay.create_comment(@comment.request.task_id, "comment attachment: #{image.image.url(:lrg)}")
+      }
+    end
+
     if !@comment.bug_id
       Asana.delay.create_comment(@comment.request.task_id, comment_params["body"])
       RequestCommentCreator.delay.send_request_comment_notifier_email(@comment)
