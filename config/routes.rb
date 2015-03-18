@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   	get "sign_in", to: "users/sessions#new", :as => :login
 	end
 
+  match '/email_suggestions', to: 'email_suggestions#index', via: :get
+
 	root "home#index"
 end
