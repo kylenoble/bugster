@@ -61,8 +61,12 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
-    @request.user_id = @user.id
-    @request.org = @user.org
+    if user_signed_in?
+      @request.user_id = @user.id
+      @request.org = @user.org
+    else 
+      @request.user_id = current_admin.id
+    end
     task_id = Asana.create_task(@workspace, @project, request_params[:title])
     @request.task_id = task_id
     if @request.save

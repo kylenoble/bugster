@@ -52,10 +52,18 @@
     </div>
   </div>
   <% end %>
-  <div class="twelve columns">
-    <div class="field">
-      <%= f.label :email %><br>
-      <%= f.text_field :email, :required => true, :placeholder => "Separate multiple email addresses with a ','", :class => 'search-field' %>
+  <div class="row">
+    <% if admin_signed_in? %>
+      <div class="six columns">
+        <%= f.label :org %><br>
+        <%= f.text_field :org %>
+      </div>
+    <% end %>
+    <div class="six columns">
+      <div class="field">
+        <%= f.label :email %><br>
+        <%= f.text_field :email, :required => true, :placeholder => "Separate multiple email addresses with a ','", :class => 'search-field' %>
+      </div>
     </div>
   </div>
   <div class="row">
