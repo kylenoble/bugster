@@ -14,5 +14,4 @@
 //= require lightbox.min
 //= require jquery_ujs
 //= require jquery-ui
-//= require autocomplete
 //= require_tree .
