@@ -8,6 +8,7 @@ class Bug < ActiveRecord::Base
 	has_many :images, :dependent => :destroy
 
 	scope :completed, -> { where(status: 'Completed') }
+	scope :open, -> { where("status != ?", ["Completed"]) }
 	accepts_nested_attributes_for :images, :allow_destroy => true
 	
 	def self.search(query)
