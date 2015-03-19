@@ -3,7 +3,9 @@ class BugCreator < ActionMailer::Base
 
   def send_bug_notifier_email(bug)
     @bug = bug
-    emails = @bug.email.split(',')
+    emails = self.remove_trailing_comma(@bug.email)
+    emails = emails.split(',')
+    puts emails
     subject = "Thanks for reporting: #{@bug.title}. Ticket ##{@bug.id}"
     emails.each do |email|
     	if @bug.priority == "Outage"
@@ -12,5 +14,9 @@ class BugCreator < ActionMailer::Base
     		mail( :to => email, :subject => subject).deliver
     	end	
     end
+  end
+
+  def remove_trailing_comma(str)
+    str.nil? ? nil : str.chomp(", ")
   end
 end

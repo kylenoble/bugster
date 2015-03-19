@@ -25,9 +25,21 @@ class BugsController < ApplicationController
       end
     else
       if admin_signed_in?
-        @bugs = Bug.search(params[:search_term]).records.page(params[:page])
+        if params[:status] == "completed"
+          @bugs = Bug.search(params[:search_term]).records.completed.order(:created_at).page(params[:page])
+        elsif params[:status] == "open"
+          @bugs = Bug.search(params[:search_term]).records.where("status != ?", ["Completed"]).order(:created_at).page(params[:page])
+        else
+          @bugs = Bug.search(params[:search_term]).records.order(:created_at).page(params[:page])
+        end
       else
-        @bugs = Bug.search(params[:search_term]).records.where("org = ?", @user.org).page(params[:page])
+        if params[:status] == "completed"
+          @bugs = Bug.where("org = ?", @user.org).search(params[:search_term]).records.completed.order(:created_at).page(params[:page])
+        elsif params[:status] == "open"
+          @bugs = Bug.where("org = ?", @user.org).search(params[:search_term]).records.where("status != ?", ["Completed"]).order(:created_at).page(1)
+        else
+          @bugs = Bug.where("org = ?", @user.org).search(params[:search_term]).records.order(:created_at).page(params[:page])
+        end
       end
     end
     respond_with(@bug)
