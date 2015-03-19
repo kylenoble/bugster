@@ -37,7 +37,6 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'bonsai-elasticsearch-rails'
 gem 'redis', '~> 3.0.7'
-gem 'whenever', :require => false
 
 group :development do
   gem "bundler-audit"

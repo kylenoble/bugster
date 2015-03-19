@@ -5,7 +5,6 @@ class BugCreator < ActionMailer::Base
     @bug = bug
     emails = self.remove_trailing_comma(@bug.email)
     emails = emails.split(',')
-    puts emails
     subject = "Thanks for reporting: #{@bug.title}. Ticket ##{@bug.id}"
     emails.each do |email|
     	if @bug.priority == "Outage"

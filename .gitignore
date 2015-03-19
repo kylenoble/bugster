@@ -13,6 +13,7 @@
 /tmp/*
 /initializers/s3_constants.rb
 public/assets/**
+/dump.rdb
 
 # Ignore application configuration
 /config/application.yml
