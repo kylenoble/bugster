@@ -8,6 +8,7 @@
     <div class="container">
       <h1>A response has been added to your support ticket. </h1>
       <p>Please take the time to review the reponse below: </p><br>
+      <h5>Author: <%= @comment.user_name %></h5>
       <h4><%= @comment.body %></h4> <br>
       <p>You can respond by clicking <a href="<%= bug_url(@comment.bug) %>#comment<%= @comment.id %>">here</a>.</p><br>
       <h5>Thanks,</h5>
