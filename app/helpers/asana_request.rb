@@ -17,7 +17,6 @@ class AsanaRequest
     }
     req = Net::HTTP::Post.new(@uri.path, header)
     req.basic_auth(@api_key, '')
-    puts request_body
     req.body = request_body.to_json()
 
     # issue the request
