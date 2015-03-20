@@ -30,21 +30,11 @@ class CommentsController < ApplicationController
       end
     end
 
-    if @comment.images && @comment.bug_id
-      @comment.images.each { |image|
-        Asana.delay.create_comment(@comment.bug.task_id, "comment attachment: #{image.image.url(:lrg)}")
-      }
-    elsif @comment.images && @comment.request_id
-      @comment.images.each { |image|
-        Asana.delay.create_comment(@comment.request.task_id, "comment attachment: #{image.image.url(:lrg)}")
-      }
-    end
-
     if !@comment.bug_id
-      Asana.delay.create_comment(@comment.request.task_id, comment_params["body"])
+      Asana.delay.create_comment(@comment.request.task_id, create_detailed_comment)
       RequestCommentCreator.delay.send_request_comment_notifier_email(@comment)
     else 
-      Asana.delay.create_comment(@comment.bug.task_id, comment_params["body"])
+      Asana.delay.create_comment(@comment.bug.task_id, create_detailed_comment)
       CommentCreator.delay.send_comment_notifier_email(@comment)
     end
     respond_type
@@ -61,6 +51,14 @@ class CommentsController < ApplicationController
   end
 
   private
+
+    def create_detailed_comment
+      image_urls = ""
+      @comment.images.each { |image|
+        image_urls += " #{image.image.url(:lrg)}, "
+      }
+      return "Body- #{@comment.body}" + " attachments: " + image_urls
+    end
 
     def set_comment
       @comment = Comment.find(params[:id]).includes(images: [:image])

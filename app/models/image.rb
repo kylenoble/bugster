@@ -17,4 +17,6 @@ class Image < ActiveRecord::Base
 						:url => "bugster.s3-website-us-east-1.amazonaws.com" 
 	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 	validates_attachment_size :image, :less_than => 2.megabytes
+
+	process_in_background :image, processing_image_url: "/assets/loading-3bb95d6378ca245cbc9e5458fd0afe85.gif"
 end

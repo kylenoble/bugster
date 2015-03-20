@@ -68,10 +68,10 @@ class BugsController < ApplicationController
       if params[:bug][:images]
         params[:bug][:images].each { |image|
           @bug.images.create(image: image)
-          Asana.create_attachment(task_id, image)
         }
       end
     end
+
     Asana.delay.create_comment(@bug.task_id, create_detailed_comment)
     BugCreator.delay.send_bug_notifier_email(@bug)
     respond_with(@bug)
@@ -104,7 +104,11 @@ class BugsController < ApplicationController
     end
 
     def create_detailed_comment
-      return "Org- #{@bug.org}" + " Reporter- #{@bug.reporter} --> " + @bug.details
+      image_urls = ""
+      @bug.images.each { |image|
+        image_urls += "#{image.image.url(:lrg)}, "
+      }
+      return "Org- #{@bug.org}" + " Reporter- #{@bug.reporter} --> " + @bug.details + " attachments: " + image_urls
     end
 
     def get_asana_info

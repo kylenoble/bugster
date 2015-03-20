@@ -73,7 +73,6 @@ class RequestsController < ApplicationController
       if params[:request][:images]
         params[:request][:images].each { |image|
           @request.images.create(image: image)
-          Asana.create_attachment(task_id, image)
         }
       end
     end
@@ -100,7 +99,11 @@ class RequestsController < ApplicationController
     end
 
     def create_detailed_comment
-      return "Org- #{@request.org}" + " Reporter- #{@request.requestor} --> " + @request.details 
+      image_urls = ""
+      @request.images.each { |image|
+        image_urls += "#{image.image.url(:lrg)}, "
+      }
+      return "Org- #{@request.org}" + " Requestor- #{@request.requestor} --> " + @request.details + " attachments: " + image_urls
     end
 
     def check_login

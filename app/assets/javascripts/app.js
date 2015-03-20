@@ -40,4 +40,11 @@ $( document ).ready(function() {
     $(this).attr("href","/requests?search_term=" + word.toString());
 	});
 
+	if ($("img[alt='Loading']").length > 0) {
+    console.log("loader exists");
+    setTimeout(function () {
+      location.reload();
+    }, 5000);
+  }
+
 });
