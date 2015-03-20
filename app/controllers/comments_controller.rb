@@ -53,11 +53,7 @@ class CommentsController < ApplicationController
   private
 
     def create_detailed_comment
-      image_urls = ""
-      @comment.images.each { |image|
-        image_urls += " #{image.image.url(:lrg)}, "
-      }
-      return "Body- #{@comment.body}" + " attachments: " + image_urls
+      return "Body- #{@comment.body}"
     end
 
     def set_comment

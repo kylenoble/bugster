@@ -103,7 +103,7 @@ class RequestsController < ApplicationController
       @request.images.each { |image|
         image_urls += "#{image.image.url(:lrg)}, "
       }
-      return "Org- #{@request.org}" + " Requestor- #{@request.requestor} --> " + @request.details + " attachments: " + image_urls
+      return "Org- #{@request.org}" + " Requestor- #{@request.requestor} --> " + @request.details
     end
 
     def check_login
