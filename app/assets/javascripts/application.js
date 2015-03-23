@@ -13,5 +13,5 @@
 //= require jquery
 //= require lightbox.min
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery.ui.all
 //= require_tree .
