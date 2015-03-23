@@ -53,11 +53,11 @@ class CommentsController < ApplicationController
   private
 
     def create_detailed_comment
-      return "Body- #{@comment.body}"
+      return "Comment Body- #{@comment.body}"
     end
 
     def set_comment
-      @comment = Comment.find(params[:id]).includes(images: [:image])
+      @comment = Comment.find(params[:id])
     end
 
     def respond_type

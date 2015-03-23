@@ -20,12 +20,23 @@ require 'rails_helper'
 
 RSpec.describe BugsController, :type => :controller do
 
+  login_user
+
   # This should return the minimal set of attributes required to create a valid
   # Bug. As you add validations to Bug, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:bug) { FactoryGirl.create(:bug) }
+  let(:valid_attributes) { { 
+    "title" => bug.title,
+    "details" => bug.details,
+    "bugster" => bug.bugster,
+    "email" => bug.email,
+    "org" => bug.org,
+    "category" => bug.category,
+    "priority" => bug.priority,
+    "reporter" => bug.reporter,
+    "task_id" => bug.task_id
+    } }
 
   let(:invalid_attributes) {
     skip("Add a hash of attributes invalid for your model")

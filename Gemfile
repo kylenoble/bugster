@@ -38,6 +38,7 @@ gem 'elasticsearch-rails'
 gem 'bonsai-elasticsearch-rails'
 gem 'redis', '~> 3.0.7'
 gem 'delayed_paperclip'
+gem 'jquery-ui-rails'
 
 group :development do
   gem "bundler-audit"
