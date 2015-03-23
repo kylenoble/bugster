@@ -71,7 +71,7 @@ class BugsController < ApplicationController
         }
       end
     end
-    Asana.delay.create_comment(@request.task_id, create_detailed_comment)
+    Asana.delay.create_comment(@bug.task_id, create_detailed_comment)
     BugCreator.delay.send_bug_notifier_email(@bug)
     respond_with(@bug)
   end
