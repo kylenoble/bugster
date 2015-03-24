@@ -32,7 +32,7 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
 
-  config.serve_static_assets = true
+  config.serve_static_assets = false
   config.assets.compile = true
 
   # Generate digests for assets URLs.
