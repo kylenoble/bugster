@@ -14,7 +14,11 @@ $( document ).ready(function() {
 
 		$('#bugsearch').on('click',function(){
 	    var word = $('#search_').val();
-	    $(this).attr("href","/tickets?status=open&search_term=" + word.toString());
+	    if (window.location.pathname == '/decision7/tickets') {
+	    	$(this).attr("href","/decision7/tickets?status=open&search_term=" + encodeURIComponent(word.toString()));
+	  	} else {
+	  		$(this).attr("href","/ignitetek/tickets?status=open&search_term=" + encodeURIComponent(word.toString()));
+	  	}
 		});
 
 	} else if (window.location.search.search(/[?&]status=completed(?:$|&)/) !== -1) {
@@ -23,7 +27,11 @@ $( document ).ready(function() {
 
 		$('#bugsearch').on('click',function(){
 	    var word = $('#search_').val();
-	    $(this).attr("href","/tickets?status=completed&search_term=" + word.toString());
+	    if (window.location.pathname == '/decision7/tickets') {
+	    	$(this).attr("href","/decision7/tickets?status=completed&search_term=" + encodeURIComponent(word.toString()));
+	  	} else {
+	  		$(this).attr("href","/ignitetek/tickets?status=completed&search_term=" + encodeURIComponent(word.toString()));
+	  	}
 		});
 	} else {
 		$("tabs a").removeClass("tab-active");
@@ -31,13 +39,17 @@ $( document ).ready(function() {
 
 		$('#bugsearch').on('click',function(){
 	    var word = $('#search_').val();
-	    $(this).attr("href","/tickets?search_term=" + word.toString());
+	    if (window.location.pathname == '/decision7/tickets') {
+	    	$(this).attr("href","/decision7/tickets?search_term=" + encodeURIComponent(word.toString()));
+	  	} else {
+	  		$(this).attr("href","/ignitetek/tickets?search_term=" + encodeURIComponent(word.toString()));
+	  	}
 		});
 	}
 
 	$('#requestsearch').on('click',function(){
     var word = $('#search_').val();
-    $(this).attr("href","/requests?search_term=" + word.toString());
+    $(this).attr("href","/requests?search_term=" + encodeURIComponent(word.toString()));
 	});
 
 	if ($("img[alt='Loading']").length > 0) {

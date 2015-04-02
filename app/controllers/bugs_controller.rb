@@ -1,6 +1,5 @@
 class BugsController < ApplicationController
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
-  before_action :get_asana_info
   before_action :check_login, except: [:show]
   respond_to :html
 
@@ -48,7 +47,6 @@ class BugsController < ApplicationController
   def show
     @comments = @bug.comments.all.order("created_at asc")
     @comment = @bug.comments.build
-    respond_with(@bug)
   end
 
   def new
@@ -61,6 +59,7 @@ class BugsController < ApplicationController
 
   def create
     @bug = Bug.new(bug_params)
+    get_asana_info
     task_id = Asana.create_task(@workspace, @project, bug_params[:title])
     @bug.task_id = task_id
     outage_reported(@bug)
@@ -73,17 +72,37 @@ class BugsController < ApplicationController
     end
     Asana.delay.create_comment(@bug.task_id, create_detailed_comment)
     BugCreator.delay.send_bug_notifier_email(@bug)
-    respond_with(@bug)
+    
+    if params[:bug][:org].to_i != 0
+      redirect_to("/decision7/tickets/#{@bug.id}")
+    else
+      redirect_to("/ignitetek/tickets/#{@bug.id}")
+    end
   end
 
   def update
-    @bug.update(bug_params)
-    respond_with(@bug)
+    if @bug.update(bug_params)   
+      if request.fullpath[1..9].downcase == "decision7"
+        redirect_to("/decision7/tickets/#{@bug.id}")
+      else
+        redirect_to("/ignitetek/tickets/#{@bug.id}")
+      end
+    else
+      if request.fullpath[1..9].downcase == "decision7"
+        redirect_to("/decision7/tickets/#{@bug.id}/edit")
+      else
+        redirect_to("/ignitetek/tickets/#{@bug.id}/edit")
+      end
+    end
   end
 
   def destroy
     @bug.destroy
-    respond_with(@bug)
+    if request.fullpath[1..9].downcase == "decision7"
+      redirect_to("/decision7/tickets")
+    else
+      redirect_to("/ignitetek/tickets")
+    end
   end
 
   private
@@ -107,8 +126,13 @@ class BugsController < ApplicationController
     end
 
     def get_asana_info
-      @workspace = 11578168261560
-      @project = 26598858855777
+      if params[:bug][:org].to_i != 0
+        @workspace = 11578168261560
+        @project = 26598858855777
+      else
+        @workspace = 11578168261560
+        @project = 30404475020681
+      end
     end
 
     def set_bug

@@ -5,7 +5,7 @@ FactoryGirl.define do
 		bugster "Kyle Noble"
 		email "kyle@test.com"
 		status "Reported"
-		org 146 
+		org "Fishbowl" 
 		category "Email" 
 		priority "Non-Service Impact"
 		reporter "Thomas Jefferson"

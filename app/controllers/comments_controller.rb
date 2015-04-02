@@ -37,7 +37,16 @@ class CommentsController < ApplicationController
       Asana.delay.create_comment(@comment.bug.task_id, create_detailed_comment)
       CommentCreator.delay.send_comment_notifier_email(@comment)
     end
-    respond_type
+
+    if !@comment.request_id && Bug.find(params[:comment][:bug_id]).org.to_i != 0
+      redirect_to("/decision7/tickets/#{@comment.bug_id}")
+    elsif !@comment.bug_id && Request.find(@comment.request_id).org.to_i != 0
+      redirect_to("/decision7/tickets/#{@comment.request_id}")
+    elsif !@comment.request_id && Bug.find(@comment.bug_id).org.to_i == 0
+      redirect_to("/ignitetek/tickets/#{@comment.bug_id}")
+    else
+      redirect_to("/ignitetek/tickets/#{@comment.request_id}")
+    end
   end
 
   def update

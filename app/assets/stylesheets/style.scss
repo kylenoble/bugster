@@ -164,6 +164,10 @@ u {
 	border-bottom: 1px solid black;
 }
 
+.ui-autocomplete li {
+	list-style: none;
+}
+
 @media only screen and (max-width: 600px)  {
 	.container {
 		margin-top: 17%;

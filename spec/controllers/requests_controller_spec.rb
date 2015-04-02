@@ -19,17 +19,31 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe RequestsController, :type => :controller do
+  login_user
 
   # This should return the minimal set of attributes required to create a valid
   # Request. As you add validations to Request, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:request) { FactoryGirl.create(:request) }
+  let(:valid_attributes) { { 
+    "title" => request.title,
+    "details" => request.details,
+    "email" => request.email,
+    "org" => request.org,
+    "category" => request.category,
+    "priority" => request.priority,
+    "requestor" => request.requestor
+    } }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) { { 
+    "title" => "",
+    "details" => "",
+    "email" => "2/15/2015",
+    "org" => "",
+    "category" => 123,
+    "priority" => "Montana",
+    "requestor" => ""
+    } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -72,7 +86,7 @@ RSpec.describe RequestsController, :type => :controller do
       it "creates a new Request" do
         expect {
           post :create, {:request => valid_attributes}, valid_session
-        }.to change(Request, :count).by(1)
+        }.to change(Request, :count).by(2)
       end
 
       it "assigns a newly created request as @request" do
@@ -102,15 +116,17 @@ RSpec.describe RequestsController, :type => :controller do
 
   describe "PUT update" do
     describe "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) { {
+            "title" => "New Title",
+            "details" => "New data",
+            "requestor" => "New reporter"
+      } }
 
       it "updates the requested request" do
         request = Request.create! valid_attributes
         put :update, {:id => request.to_param, :request => new_attributes}, valid_session
         request.reload
-        skip("Add assertions for updated state")
+        expect(response).to redirect_to(request)
       end
 
       it "assigns the requested request as @request" do

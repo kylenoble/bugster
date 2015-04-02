@@ -7,6 +7,8 @@ class Bug < ActiveRecord::Base
 	has_many :comments, :dependent => :destroy 
 	has_many :images, :dependent => :destroy
 
+	validates :reporter, :email, :org, :title, :details, :presence => true
+
 	scope :completed, -> { where(status: 'Completed') }
 	scope :open, -> { where("status != ?", ["Completed"]) }
 	accepts_nested_attributes_for :images, :allow_destroy => true

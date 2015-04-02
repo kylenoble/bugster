@@ -1,7 +1,6 @@
 class RequestsController < ApplicationController
   before_action :check_login
   before_action :set_request, only: [:show, :edit, :update, :destroy]
-  before_action :get_asana_info
   respond_to :html
 
   def index
@@ -67,6 +66,7 @@ class RequestsController < ApplicationController
     else 
       @request.user_id = current_admin.id
     end
+    get_asana_info
     task_id = Asana.create_task(@workspace, @project, request_params[:title])
     @request.task_id = task_id
     if @request.save
@@ -78,24 +78,49 @@ class RequestsController < ApplicationController
     end
     Asana.delay.create_comment(@request.task_id, create_detailed_comment)
     RequestCreator.delay.send_request_notifier_email(@request)
-    respond_with(@request)
+
+    if params[:request][:org].to_i != 0
+      redirect_to("/decision7/requests/#{@request.id}")
+    else
+      redirect_to("/ignitetek/requests/#{@request.id}")
+    end
   end
 
   def update
-    @request.update(request_params)
-    respond_with(@request)
+    if @request.update(request_params)   
+      if request.fullpath[1..9].downcase == "decision7"
+        redirect_to("/decision7/requests/#{@request.id}")
+      else
+        redirect_to("/ignitetek/requests/#{@request.id}")
+      end
+    else
+      if request.fullpath[1..9].downcase == "decision7"
+        redirect_to("/decision7/requests/#{@request.id}/edit")
+      else
+        redirect_to("/ignitetek/requests/#{@request.id}/edit")
+      end
+    end
   end
 
   def destroy
     @request.destroy
-    respond_with(@request)
+    if request.fullpath[1..9].downcase == "decision7"
+      redirect_to("/decision7/requests")
+    else
+      redirect_to("/ignitetek/requests")
+    end
   end
 
   private
 
     def get_asana_info
-      @workspace = 11578168261560
-      @project = 26598858855779
+      if request.fullpath[1..9].downcase == "decision7"
+        @workspace = 11578168261560
+        @project = 26598858855779
+      else
+        @workspace = 11578168261560
+        @project = 30404475020683
+      end
     end
 
     def create_detailed_comment

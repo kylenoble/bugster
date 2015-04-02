@@ -1,4 +1,8 @@
-<%= link_to 'Back', requests_path, {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
+<% if request.fullpath[1..9].downcase == "decision7" %>
+  <%= link_to 'Back', "/decision7/requests", {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
+<% else %>
+  <%= link_to 'Back', "/ignitetek/requests", {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
+<% end %>
 <% if admin_signed_in? %>
   | <%= link_to 'Edit', edit_request_path(@request), {:style=>'text-align:center; margin-top:2rem;', :class => "button"} %>
   | <%= link_to 'Destroy', @request, { method: :delete, :style=>'text-align:center; margin-top:2rem;', :class => "button", data: { confirm: 'Are you sure?' }} %>

@@ -60,12 +60,16 @@
 </head>
 <body class="<%= body_class %>">
   <div class="twelve columns nav">
-    <% if request.path == "/requests" %>
+    <% if request.path == "/decision7/requests" || request.path == "/ignitetek/requests" %>
       <div class="one column offset-by-one">
-        <%= link_to 'New request', new_request_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+        <%= link_to 'New request', request.path + '/new', {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
       </div>
       <div class="one column offset-by-two">
-        <%= link_to 'Support Tickets', bugs_path, {:style=>'text-align:center; margin-top: 1rem;', :class => "button"} %>
+        <% if request.path == "/decision7/requests" %>
+          <%= link_to 'Support Tickets', '/decision7/tickets', {:style=>'text-align:center; margin-top: 1rem;', :class => "button"} %>
+        <% else %>
+          <%= link_to 'Support Tickets', '/ignitetek/tickets', {:style=>'text-align:center; margin-top: 1rem;', :class => "button"} %>
+        <% end %>
       </div>
       <div class="one column offset-by-five">
         <% if user_signed_in? %>
@@ -76,12 +80,16 @@
           <%= link_to "Sign in", new_user_session_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
         <% end %>
       </div>
-    <% elsif request.path == "/tickets" %>
+    <% elsif request.path == "/decision7/tickets" || request.path == "/ignitetek/tickets" %>
       <div class="one column offset-by-one">
-        <%= link_to 'New Ticket', new_bug_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+        <%= link_to 'New Ticket', request.path + '/new', {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
       </div>
       <div class="one column offset-by-two">
-        <%= link_to 'View Requests', requests_path, {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+        <% if request.path == "/decision7/tickets" %>
+          <%= link_to 'View Requests', '/decision7/requests', {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+        <% else %>
+          <%= link_to 'View Requests', '/ignitetek/requests', {:style=>'text-align:center; margin-top:1rem;', :class => "button"} %>
+        <% end %>
       </div>
       <div class="one column offset-by-five">
         <% if user_signed_in? %>

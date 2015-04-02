@@ -6,6 +6,8 @@ class Request < ActiveRecord::Base
 
 	has_many :comments, :dependent => :destroy 
 	has_many :images, :dependent => :destroy
+
+	validates :requestor, :email, :org, :title, :details, :presence => true
 	
 	scope :completed, -> { where(status: 'Completed') }
 	scope :open, -> { where.not(status: 'Completed') }

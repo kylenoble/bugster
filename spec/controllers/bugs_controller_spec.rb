@@ -34,13 +34,20 @@ RSpec.describe BugsController, :type => :controller do
     "org" => bug.org,
     "category" => bug.category,
     "priority" => bug.priority,
-    "reporter" => bug.reporter,
-    "task_id" => bug.task_id
+    "reporter" => bug.reporter
     } }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) { { 
+    "title" => "",
+    "details" => "",
+    "bugster" => 123,
+    "email" => "2/15/2015",
+    "org" => "",
+    "category" => 123,
+    "priority" => "Montana",
+    "reporter" => "",
+    "task_id" => ""
+    } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -82,8 +89,10 @@ RSpec.describe BugsController, :type => :controller do
     describe "with valid params" do
       it "creates a new Bug" do
         expect {
+          puts "bug size #{Bug.all.size}"
           post :create, {:bug => valid_attributes}, valid_session
-        }.to change(Bug, :count).by(1)
+          puts "new bug size #{Bug.all.size}"
+        }.to change{ Bug.all.size }.by(2)
       end
 
       it "assigns a newly created bug as @bug" do
@@ -113,15 +122,17 @@ RSpec.describe BugsController, :type => :controller do
 
   describe "PUT update" do
     describe "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) { {
+            "title" => "New Title",
+            "details" => "New data",
+            "bugster" => "New bugster"
+      } }
 
       it "updates the requested bug" do
         bug = Bug.create! valid_attributes
         put :update, {:id => bug.to_param, :bug => new_attributes}, valid_session
         bug.reload
-        skip("Add assertions for updated state")
+        expect(response).to redirect_to(bug)
       end
 
       it "assigns the requested bug as @bug" do

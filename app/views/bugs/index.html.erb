@@ -5,7 +5,11 @@
     </div>
   </div>
   <ul class="row tabs">
-    <li class="two columns" id="tab1"><%= link_to 'All', bugs_path, {:style=>'text-align:center; margin-top: 20px;'} %></li>
+    <% if request.fullpath[1..9].downcase == "decision7" %>
+      <li class="two columns" id="tab1"><%= link_to 'All', "/decision7/tickets", {:style=>'text-align:center; margin-top: 20px;'} %></li>
+    <% else %>
+      <li class="two columns" id="tab1"><%= link_to 'All', "/ignitetek/tickets", {:style=>'text-align:center; margin-top: 20px;'} %></li>
+    <% end %>
     <li class="two columns" id="tab2"><%= link_to 'Open', {:status => "open"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
     <li class="two columns" id="tab3"><%= link_to 'Completed', {:status => "completed"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
     <div class="three columns offset-by-two">
@@ -38,7 +42,11 @@
             <td colspan="2"><%= bug.title %></td>
             <td><%= bug.push_date %></td>
             <td colspan="2"><%= bug.reporter %></td>
-            <td class="table-button"><%= link_to 'Show', bug, {:style=>'text-align:center; margin-top:1rem; margin-left: -1rem;', :class => "button"} %></td>
+            <% if request.fullpath[1..9].downcase == "decision7" %>
+              <td class="table-button"><%= link_to 'Show', "/decision7/tickets/#{bug.id}", {:style=>'text-align:center; margin-top:1rem; margin-left: -1rem;', :class => "button"} %></td>
+            <% else %>
+              <td class="table-button"><%= link_to 'Show', "/ignitetek/tickets/#{bug.id}", {:style=>'text-align:center; margin-top:1rem; margin-left: -1rem;', :class => "button"} %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
