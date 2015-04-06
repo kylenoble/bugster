@@ -41,13 +41,13 @@
     <div class="six columns offset by two">
       <div class="field">
         <%= f.label :org %><br>
-        <%= f.text_field :org, :required => true, :placeholder => "Enter Your Org Number" %>
+        <%= f.text_field :org, :required => true, :placeholder => "Enter Your Org" %>
       </div>
     </div>
     <div class="six columns">
       <div class="field">
         <%= f.label :category %><br>
-        <%= f.select(:category, options_for_select(["Email", "Chat", "Social", "SMS", "Admin"]), {}, { :class => 'u-full-width' } ) %>
+        <%= f.select(:category, options_for_select(["Email", "Chat", "Social", "SMS", "Admin", "General"]), {}, { :class => 'u-full-width' } ) %>
       </div>
     </div>
   </div>
