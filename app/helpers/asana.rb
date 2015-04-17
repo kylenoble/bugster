@@ -8,7 +8,7 @@ class Asana
         "workspace" => workspace,
         "name" => name,
         "projects" => [project], 
-        "assignee" => '11578171723085'
+        "assignee" => '31488630012550'
       }
     }
 
