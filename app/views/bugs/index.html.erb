@@ -12,7 +12,8 @@
     <% end %>
     <li class="two columns" id="tab2"><%= link_to 'Open', {:status => "open"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
     <li class="two columns" id="tab3"><%= link_to 'Completed', {:status => "completed"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
-    <div class="three columns offset-by-two">
+    <li class="two columns" id="tab4"><%= link_to 'Monitoring', {:status => "monitoring"}, {:style=>'text-align:center; margin-top: 20px;'} %></li>
+    <div class="three columns">
       <div class="field search">
         <%= text_field :search, '' %>
       </div>

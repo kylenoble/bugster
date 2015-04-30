@@ -10,6 +10,8 @@ class BugsController < ApplicationController
           @bugs = Bug.completed.order(:created_at).page(params[:page])
         elsif params[:status] == "open"
           @bugs = Bug.open.order(:created_at).page(params[:page])
+        elsif params[:status] == "monitoring"
+          @bugs = Bug.monitoring.order(:created_at).page(params[:page])
         else
           @bugs = Bug.order(:created_at).page(params[:page])
         end
@@ -18,6 +20,8 @@ class BugsController < ApplicationController
           @bugs = Bug.completed.where("org = ?", @user.org).order(:created_at).page(params[:page])
         elsif params[:status] == "open"
           @bugs = Bug.open.where("org = ?", @user.org).order(:created_at).page(params[:page])
+        elsif params[:status] == "monitoring"
+          @bugs = Bug.monitoring.where("org = ?", @user.org).order(:created_at).page(params[:page])
         else
           @bugs = Bug.where("org = ?", @user.org).order(:created_at).page(params[:page])
         end
@@ -28,6 +32,8 @@ class BugsController < ApplicationController
           @bugs = Bug.search(params[:search_term]).records.completed.order(:created_at).page(params[:page])
         elsif params[:status] == "open"
           @bugs = Bug.search(params[:search_term]).records.where("status != ?", ["Completed"]).order(:created_at).page(params[:page])
+        elsif params[:status] == "monitoring"
+          @bugs = Bug.search(params[:search_term]).records.where("status = ?", ["Monitoring"]).order(:created_at).page(params[:page])
         else
           @bugs = Bug.search(params[:search_term]).records.order(:created_at).page(params[:page])
         end
@@ -36,6 +42,8 @@ class BugsController < ApplicationController
           @bugs = Bug.where("org = ?", @user.org).search(params[:search_term]).records.completed.order(:created_at).page(params[:page])
         elsif params[:status] == "open"
           @bugs = Bug.where("org = ?", @user.org).search(params[:search_term]).records.where("status != ?", ["Completed"]).order(:created_at).page(1)
+        elsif params[:status] == "monitoring"
+          @bugs = Bug.where("org = ?", @user.org).search(params[:search_term]).records.where("status != ?", ["Monitoring"]).order(:created_at).page(1)
         else
           @bugs = Bug.where("org = ?", @user.org).search(params[:search_term]).records.order(:created_at).page(params[:page])
         end

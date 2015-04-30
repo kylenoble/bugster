@@ -9,6 +9,7 @@ $( document ).ready(function() {
 	});
 
 	if (window.location.search.search(/[?&]status=open(?:$|&)/) !== -1) {
+		console.log("true");
 		$("tabs a").removeClass("tab-active");
 		$("#tab2 a").addClass("tab-active");
 
@@ -33,6 +34,19 @@ $( document ).ready(function() {
 	  		$(this).attr("href","/ignitetek/tickets?status=completed&search_term=" + encodeURIComponent(word.toString()));
 	  	}
 		});
+	} else if (window.location.search.search(/[?&]status=monitoring(?:$|&)/) == 0) {
+		console.log("true");
+		$("tabs a").removeClass("tab-active");
+		$("#tab4 a").addClass("tab-active");
+
+		$('#bugsearch').on('click',function(){
+	    var word = $('#search_').val();
+	    if (window.location.pathname == '/decision7/tickets') {
+	    	$(this).attr("href","/decision7/tickets?status=monitoring&search_term=" + encodeURIComponent(word.toString()));
+	  	} else {
+	  		$(this).attr("href","/ignitetek/tickets?status=monitoring&search_term=" + encodeURIComponent(word.toString()));
+	  	}
+		});
 	} else {
 		$("tabs a").removeClass("tab-active");
 		$("#tab1 a").addClass("tab-active");
@@ -46,6 +60,8 @@ $( document ).ready(function() {
 	  	}
 		});
 	}
+
+	console.log(window.location.search.search(/[?&]status=monitoring(?:$|&)/));
 
 	$('#requestsearch').on('click',function(){
     var word = $('#search_').val();
