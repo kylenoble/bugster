@@ -1,5 +1,5 @@
 class BugCreator < ActionMailer::Base
-  default from: "bugster@ignitemedia.com"
+  default from: "donotreply@bugster.ignite-tek.com"
 
   def send_bug_notifier_email(bug)
     @bug = bug

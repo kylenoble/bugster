@@ -1,5 +1,5 @@
 class RequestCreator < ActionMailer::Base
-  default from: "bugster@ignitemedia.com"
+  default from: "donotreply@bugster.ignite-tek.com"
 
   def send_request_notifier_email(request)
     @request = request

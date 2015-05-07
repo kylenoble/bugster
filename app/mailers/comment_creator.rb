@@ -1,5 +1,5 @@
 class CommentCreator < ActionMailer::Base
-  default from: "bugster@ignitemedia.com"
+  default from: "donotreply@bugster.ignite-tek.com"
 
   def send_comment_notifier_email(comment)
   	@comment = comment
