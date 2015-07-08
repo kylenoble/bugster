@@ -3,8 +3,7 @@ class RequestCreator < ActionMailer::Base
 
   def send_request_notifier_email(request)
     @request = request
-    emails = self.remove_trailing_comma(@request.email)
-    emails = emails.split(',')
+    emails = self.remove_trailing_comma(@request.email).split(',').reject { |a| a.strip.length == 0 }
     subject = "Thanks for reporting: #{@request.title}. Request ##{@request.id}"
     emails.each do |email|
     	mail( :to => email, :subject => subject ).deliver

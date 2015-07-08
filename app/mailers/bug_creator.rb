@@ -3,8 +3,7 @@ class BugCreator < ActionMailer::Base
 
   def send_bug_notifier_email(bug)
     @bug = bug
-    emails = self.remove_trailing_comma(@bug.email)
-    emails = emails.split(',')
+    emails = self.remove_trailing_comma(@bug.email).split(',').reject { |a| a.strip.length == 0 }
     subject = "Thanks for reporting: #{@bug.title}. Ticket ##{@bug.id}"
     emails.each do |email|
     	if @bug.priority == "Outage"
