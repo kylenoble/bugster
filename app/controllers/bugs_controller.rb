@@ -1,6 +1,6 @@
 class BugsController < ApplicationController
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
-  before_action :check_login, except: [:show]
+  before_action :check_login, except: [:show, :new]
   respond_to :html
 
   def index
