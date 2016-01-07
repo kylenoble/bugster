@@ -39,6 +39,7 @@ gem 'bonsai-elasticsearch-rails'
 gem 'redis', '~> 3.0.7'
 gem 'delayed_paperclip'
 gem 'sinatra'
+gem 'ruby-trello'
 
 group :development do
   gem "bundler-audit"

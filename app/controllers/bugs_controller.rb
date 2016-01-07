@@ -67,9 +67,18 @@ class BugsController < ApplicationController
 
   def create
     @bug = Bug.new(bug_params)
-    get_asana_info
-    task_id = Asana.create_task(@workspace, @project, bug_params[:title])
-    @bug.task_id = task_id
+    get_trello_info
+    description = create_description(bug_params[:org], bug_params[:reporter], bug_params[:details])
+    trello_card = Trello::Card.create(
+      name: bug_params[:title],
+      list_id: @list,
+      desc: description,
+      pos: "top"
+    )
+    trello_card.card_labels = [ bug_params[:category] ]
+    trello_card.member_ids = [ "55b16198a7f9f5b30ea59a7b", "563afdd70fe34772fefe0b7d" ]
+    trello_card.save
+    @bug.task_id = trello_card.id
     outage_reported(@bug)
     if @bug.save
       if params[:bug][:images]
@@ -78,9 +87,8 @@ class BugsController < ApplicationController
         }
       end
     end
-    Asana.delay.create_comment(@bug.task_id, create_detailed_comment)
     BugCreator.delay.send_bug_notifier_email(@bug)
-    
+
     if params[:bug][:org].to_i != 0
       redirect_to("/decision7/tickets/#{@bug.id}")
     else
@@ -89,7 +97,7 @@ class BugsController < ApplicationController
   end
 
   def update
-    if @bug.update(bug_params)   
+    if @bug.update(bug_params)
       if request.fullpath[1..9].downcase == "decision7"
         redirect_to("/decision7/tickets/#{@bug.id}")
       else
@@ -118,28 +126,26 @@ class BugsController < ApplicationController
     def check_login
       if user_signed_in? || admin_signed_in?
         @user = current_user
-      else 
+      else
         redirect_to :login
       end
     end
 
     def outage_reported(bug)
       if bug.priority == "Outage"
-        @bug.email += ", knoble@ignitemedia.com, hdobariya@ignitemedia.com, sandy@ignitemedia.com"
+        @bug.email += ", kyle@531networks.com, hiren@531networks.com, paolo@531networks.com"
       end
     end
 
-    def create_detailed_comment
-      return "Org- #{@bug.org}" + " Reporter- #{@bug.reporter} --> " + @bug.details
+    def create_description(org, reporter, details)
+      return "Org- #{org}" + " Reporter- #{reporter} --> \n\n\n" + details
     end
 
-    def get_asana_info
-      if params[:bug][:org].to_i != 0
-        @workspace = 11578168261560
-        @project = 26598858855777
+    def get_trello_info
+      if params[:bug][:org].to_i != 146
+        @list = '563a2cc1919235cd981e6c96'
       else
-        @workspace = 11578168261560
-        @project = 30404475020681
+        @list = '563a2c8115c96bd573633235'
       end
     end
 

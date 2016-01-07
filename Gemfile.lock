@@ -93,6 +93,8 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    domain_name (0.5.23)
+      unf (>= 0.0.5, < 1.0.0)
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
@@ -138,6 +140,8 @@ GEM
     highline (1.6.21)
     hike (1.2.3)
     hirefire-resource (0.3.5)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     i18n (0.7.0)
     i18n-tasks (0.7.11)
       activesupport
@@ -171,10 +175,12 @@ GEM
     neat (1.5.1)
       bourbon (>= 3.1)
       sass (~> 3.2.19)
+    netrc (0.7.8)
     newrelic_rpm (3.9.9.275)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     normalize-rails (3.0.1)
+    oauth (0.4.7)
     orm_adapter (0.5.0)
     paperclip (4.2.1)
       activemodel (>= 3.0.0)
@@ -221,6 +227,10 @@ GEM
     redis (3.0.7)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -237,6 +247,12 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
+    ruby-trello (1.4.1)
+      activemodel (>= 3.2.0)
+      addressable (~> 2.3)
+      json
+      oauth (~> 0.4.5)
+      rest-client (~> 1.8.0)
     safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.5)
@@ -288,6 +304,9 @@ GEM
     uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.6)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
@@ -348,6 +367,7 @@ DEPENDENCIES
   recipient_interceptor
   redis (~> 3.0.7)
   rspec-rails
+  ruby-trello
   sass
   sass-rails
   sendgrid

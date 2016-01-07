@@ -31,10 +31,12 @@ class CommentsController < ApplicationController
     end
 
     if !@comment.bug_id
-      Asana.delay.create_comment(@comment.request.task_id, create_detailed_comment)
+      @request = Trello::Card.find(@comment.request.task_id)
+      @request.add_comment(create_detailed_comment)
       RequestCommentCreator.delay.send_request_comment_notifier_email(@comment)
-    else 
-      Asana.delay.create_comment(@comment.bug.task_id, create_detailed_comment)
+    else
+      @bug = Trello::Card.find(@comment.bug.task_id)
+      @bug.add_comment(create_detailed_comment)
       CommentCreator.delay.send_comment_notifier_email(@comment)
     end
 
@@ -72,7 +74,7 @@ class CommentsController < ApplicationController
     def respond_type
       if !@comment.bug_id
         redirect_to(@comment.request)
-      else 
+      else
         redirect_to(@comment.bug)
       end
     end

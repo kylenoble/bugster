@@ -41,7 +41,7 @@ class RequestsController < ApplicationController
         end
       end
     end
-    respond_with(@bug)
+    respond_with(@request)
   end
 
   def show
@@ -63,12 +63,21 @@ class RequestsController < ApplicationController
     if user_signed_in?
       @request.user_id = @user.id
       @request.org = @user.org
-    else 
+    else
       @request.user_id = current_admin.id
     end
-    get_asana_info
-    task_id = Asana.create_task(@workspace, @project, request_params[:title])
-    @request.task_id = task_id
+    get_trello_info
+    description = create_description(request_params[:org], request_params[:reporter], request_params[:details])
+    trello_card = Trello::Card.create(
+      name: request_params[:title],
+      list_id: @list,
+      desc: description,
+      pos: "top"
+    )
+    trello_card.card_labels = [ request_params[:category] ]
+    trello_card.member_ids = [ "55b16198a7f9f5b30ea59a7b", "563afdd70fe34772fefe0b7d" ]
+    trello_card.save
+    @request.task_id = trello_card.id
     if @request.save
       if params[:request][:images]
         params[:request][:images].each { |image|
@@ -76,7 +85,6 @@ class RequestsController < ApplicationController
         }
       end
     end
-    Asana.delay.create_comment(@request.task_id, create_detailed_comment)
     RequestCreator.delay.send_request_notifier_email(@request)
 
     if params[:request][:org].to_i != 0
@@ -87,7 +95,7 @@ class RequestsController < ApplicationController
   end
 
   def update
-    if @request.update(request_params)   
+    if @request.update(request_params)
       if request.fullpath[1..9].downcase == "decision7"
         redirect_to("/decision7/requests/#{@request.id}")
       else
@@ -113,14 +121,12 @@ class RequestsController < ApplicationController
 
   private
 
-    def get_asana_info
-      if request.fullpath[1..9].downcase == "decision7"
-        @workspace = 11578168261560
-        @project = 26598858855779
-      else
-        @workspace = 11578168261560
-        @project = 30404475020683
-      end
+    def create_description(org, reporter, details)
+      return "Org- #{org}" + " Reporter- #{reporter} --> \n\n\n" + details
+    end
+
+    def get_trello_info
+      @list = '568e914763989c9a48143f33'
     end
 
     def create_detailed_comment
@@ -134,7 +140,7 @@ class RequestsController < ApplicationController
     def check_login
       if user_signed_in? || admin_signed_in?
         @user = current_user
-      else 
+      else
         redirect_to :login
       end
     end

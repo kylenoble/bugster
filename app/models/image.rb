@@ -12,11 +12,11 @@ class Image < ActiveRecord::Base
 	has_attached_file :image, :styles => { :lrg => "700x700>", :med => "350x350>"}, :whiny => false,
 			      :storage => :s3,
 			      :bucket  => ENV['AWS_BUCKET_NAME'],
-    				:s3_credentials => 
+    				:s3_credentials =>
     				{ :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
       				:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'] },
     				:path => "/images/:attachment/:id/:style/:filename",
-						:url => "bugster.s3-website-us-east-1.amazonaws.com" 
+						:url => "bugster.s3-website-us-east-1.amazonaws.com"
 	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 	validates_attachment_size :image, :less_than => 2.megabytes
 
@@ -24,18 +24,22 @@ class Image < ActiveRecord::Base
 
 	def upload_asana_attachment
 		puts self
-		if self.bug_id 
-			@bug = Bug.find(self.bug_id)
-      Asana.delay.create_comment(@bug.task_id, "Attachment: #{image}")
+		if self.bug_id
+			@trello_card = Trello::Card.find(self.bug.task_id)
+      @trello_card.add_attachment(image)
     elsif self.request_id
-			@request = Request.find(self.request_id)
-      Asana.delay.create_comment(@request.task_id, "Attachment: #{image}")
+			@trello_card = Trello::Card.find(self.request.task_id)
+      @trello_card.add_attachment(image)
     elsif self.comment_id
     	@comment = Comment.find(self.comment_id)
     	if @comment.bug_id
-	      Asana.delay.create_comment(@comment.bug.task_id, "Attachment: #{image}")
-	    else 
-	       Asana.delay.create_comment(@comment.request.task_id, "Attachment: #{image}")
+				@bug = Bug.find(@comment.bug_id)
+				@trello_card = Trello::Card.find(@bug.task_id)
+				@trello_card.add_attachment(image)
+	    else
+				@request = Request.find(@comment.request_id)
+				@trello_card = Trello::Card.find(@request.task_id)
+				@trello_card.add_attachment(image)
 	    end
     end
 	end

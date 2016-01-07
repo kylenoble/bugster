@@ -9,10 +9,10 @@ body {
 }
 
 .button {
-	background: -webkit-linear-gradient(left, rgba(255,255,255,.5), rgba(255,255,255,.55)); 
-  background: -o-linear-gradient(right, rgba(255,255,255,.5), rgba(255,255,255,.55)); 
-  background: -moz-linear-gradient(right, rgba(255,255,255,.5), rgba(255,255,255,.55));
-  background: linear-gradient(to right, rgba(255,255,255,.5), rgba(255,255,255,.55)); 
+	background: -webkit-linear-gradient(left, rgba(255,255,255,1), rgba(255,255,255,1));
+  background: -o-linear-gradient(right, rgba(255,255,255,1), rgba(255,255,255,1));
+  background: -moz-linear-gradient(right, rgba(255,255,255,1), rgba(255,255,255,1));
+  background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,1));
 }
 
 .container {
@@ -44,7 +44,7 @@ body {
 
 .hero {
 	height: 100vh;
-  background-image: url("https://ununsplash.imgix.net/38/L2NfDz5SOm7Gbf755qpw_DSCF0490.jpg?q=75&fm=jpg&s=385fefca6e96d3bc1c0ea31794dc4562");
+  background-image: url("https://images.unsplash.com/photo-1433840496881-cbd845929862?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8dcb8262ded1206ca0d426a52fe19300");
   background-size: cover;
   background-position: center;
   font-weight: 700;
@@ -57,12 +57,12 @@ body {
 }
 
 .nav {
-	background: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
-  background: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+	background: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55));
+  background: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
   background: -moz-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
   background: linear-gradient(to right, rgba(238,233,233,.5), rgba(238,233,233,.55));
   position: fixed;
-  top: 0; 
+  top: 0;
   border-bottom: 1px solid rgba(1,1,1,.1);
 }
 
@@ -89,11 +89,11 @@ body {
 }
 
 .search {
-	text-align:center; 
+	text-align:center;
 	margin-top: 20px;
 }
 
-.tabs { 
+.tabs {
   float: none;
   list-style: none;
   position: relative;
@@ -112,8 +112,8 @@ body {
     text-decoration: none;
     color: black;
     &:hover {
-	    background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
-  		background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+	    background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55));
+  		background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
   		background-image: -moz-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
   		background-image: linear-gradient(to right, rgba(238,233,233,.5), rgba(238,233,233,.55));
 	    border-radius: 2px 2px 0 0;
@@ -121,28 +121,28 @@ body {
   }
   .tab-content{
     z-index: 2;
-    display: none; 
+    display: none;
     overflow: hidden;
     width: 100%;
     font-size: 17px;
     line-height: 25px;
-    padding: 25px;  
+    padding: 25px;
     position: absolute;
     top: 53px;
-    left: 0; 
-    background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
-		background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+    left: 0;
+    background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55));
+		background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
 		background-image: -moz-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
 		background-image: linear-gradient(to right, rgba(238,233,233,.5), rgba(238,233,233,.55));
   }
 }
 
-.tab-active { 
+.tab-active {
   display: block;
   padding: 14px 21px;
   border-radius: 2px 2px 0 0;
-  background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
-	background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+  background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55));
+	background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
 	background-image: -moz-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
 	background-image: linear-gradient(to right, rgba(238,233,233,.5), rgba(238,233,233,.55));
   cursor: pointer;
@@ -151,8 +151,8 @@ body {
 }
 
 .tab-content {
-  background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
-	background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55)); 
+  background-image: -webkit-linear-gradient(left, rgba(238,233,233,.5), rgba(238,233,233,.55));
+	background-image: -o-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
 	background-image: -moz-linear-gradient(right, rgba(238,233,233,.5), rgba(238,233,233,.55));
 	background-image: linear-gradient(to right, rgba(238,233,233,.5), rgba(238,233,233,.55));
 	padding-left: 25px;
@@ -182,7 +182,7 @@ u {
 	.container {
 		margin-top: 10%;
 	}
-} 
+}
 
 @media only screen and (max-width: 850px) {
 	.search {
@@ -196,46 +196,46 @@ u {
 	#requestsearch {
 		display: none;
 	}
-} 
+}
 
 @media only screen and (max-width: 915px)  {
 
 	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
+	table, thead, tbody, th, td, tr {
+		display: block;
 	}
-	
+
 	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
+	thead tr {
 		position: absolute;
 		top: -9999px;
 		left: -9999px;
 	}
-	
+
 	tr { border: 1px solid #ccc; }
-	
+
 	th:first-child, td:first-child {
-  	padding-left: 50%; 
+  	padding-left: 50%;
   }
-	td { 
+	td {
 		/* Behave  like a "row" */
 		border: none;
-		border-bottom: 1px solid #eee; 
+		border-bottom: 1px solid #eee;
 		position: relative;
-		padding-left: 50%; 
+		padding-left: 50%;
 	}
-	
-	td:before { 
+
+	td:before {
 		/* Now like a table header */
 		position: absolute;
 		/* Top/left values mimic padding */
 		top: 6px;
 		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
+		width: 45%;
+		padding-right: 10px;
 		white-space: nowrap;
 	}
-	
+
 	/*
 	Label the data
 	*/

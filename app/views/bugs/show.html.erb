@@ -81,7 +81,7 @@
             <p><strong><u>Images:</u></strong></p>
             <% @bug.images.each do |image| %>
                 <a class="without-caption image-link" data-lightbox="image-1" rel="shadowbox" href="<%=image.image.url %>" title=""><%= image_tag image.image.url(:med) %></a>
-            <% end %>  
+            <% end %>
           </div>
       </div>
     </div>
@@ -90,10 +90,10 @@
 <div class="row">
   <div class="twelve columns">
     <h3><u>Comments</u></h3>
-    <% @comments.each do |comment| %>
+    <% @comments.includes([:images]).each do |comment| %>
       <div class="row">
         <a name="comment<%= comment.id %>"></a>
-        <strong><u><%= comment.user_name %></u></strong> 
+        <strong><u><%= comment.user_name %></u></strong>
         <i class="comment-date"><%= time_ago_in_words(comment.created_at) + " Ago" %></i>
         <% if comment.images.exists? %>
           <div class="row">
@@ -103,7 +103,7 @@
                     <p><strong><u>Images:</u></strong></p>
                     <% comment.images.each do |image| %>
                         <a class="without-caption image-link" data-lightbox="image-1" rel="shadowbox" href="<%=image.image.url %>" title=""><%= image_tag image.image.url(:med) %></a>
-                    <% end %>  
+                    <% end %>
                   </div>
               </div>
             </div>
